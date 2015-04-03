@@ -16,5 +16,6 @@
     <string name="Social">Social</string>
     <string name="Phone">Phone</string>
     <string name="Media">Media</string>
+    <string name="title_activity_sign_on">SignOnActivity</string>
 
 </resources>
