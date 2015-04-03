@@ -1,5 +1,3 @@
-package in.tosc.bookd.ui;
-
 /*
  * Copyright 2014 Google Inc. All rights reserved.
  *
@@ -16,6 +14,7 @@ package in.tosc.bookd.ui;
  * limitations under the License.
  */
 
+package in.tosc.bookd.ui;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -32,6 +31,9 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import in.tosc.bookd.R;
+
+
 /**
  * To be used with ViewPager to provide a tab indicator component which give constant feedback as to
  * the user's scroll progress.
@@ -42,7 +44,7 @@ import android.widget.TextView;
  * <p>
  * The colors can be customized in two ways. The first and simplest is to provide an array of colors
  * via {@link #setSelectedIndicatorColors(int...)}. The
- * alternative is via the {@link in.tosc.bookd.ui.SlidingTabLayout.TabColorizer} interface which provides you complete control over
+ * alternative is via the {@link TabColorizer} interface which provides you complete control over
  * which color is used for any individual position.
  * <p>
  * The views used as tabs can be customized by calling {@link #setCustomTabView(int, int)},
@@ -51,7 +53,7 @@ import android.widget.TextView;
 public class SlidingTabLayout extends HorizontalScrollView {
     /**
      * Allows complete control over the colors drawn in the tab layout. Set with
-     * {@link #setCustomTabColorizer(in.tosc.bookd.ui.SlidingTabLayout.TabColorizer)}.
+     * {@link #setCustomTabColorizer(TabColorizer)}.
      */
     public interface TabColorizer {
 
@@ -101,7 +103,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
 
     /**
-     * Set the custom {@link in.tosc.bookd.ui.SlidingTabLayout.TabColorizer} to be used.
+     * Set the custom {@link TabColorizer} to be used.
      *
      * If you only require simple custmisation then you can use
      * {@link #setSelectedIndicatorColors(int...)} to achieve
@@ -124,7 +126,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
 
     /**
-     * Set the {@link android.support.v4.view.ViewPager.OnPageChangeListener}. When using {@link in.tosc.bookd.ui.SlidingTabLayout} you are
+     * Set the {@link android.support.v4.view.ViewPager.OnPageChangeListener}. When using {@link SlidingTabLayout} you are
      * required to set any {@link android.support.v4.view.ViewPager.OnPageChangeListener} through this method. This is so
      * that the layout can update it's scroll position correctly.
      *
@@ -147,7 +149,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     /**
      * Sets the associated view pager. Note that the assumption here is that the pager content
-     * (number of tabs and tab titles) does not change after this call has been made.
+     * (number of tabs and tab TAB_TITLES) does not change after this call has been made.
      */
     public void setViewPager(ViewPager viewPager) {
         mTabStrip.removeAllViews();
@@ -175,7 +177,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
                 outValue, true);
         textView.setBackgroundResource(outValue.resourceId);
-        textView.setAllCaps(true);
+        //textView.setAllCaps(true);
 
         int padding = (int) (TAB_VIEW_PADDING_DIPS * getResources().getDisplayMetrics().density);
         textView.setPadding(padding, padding, padding, padding);
@@ -185,7 +187,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     private void populateTabStrip() {
         final PagerAdapter adapter = mViewPager.getAdapter();
-        final OnClickListener tabClickListener = new TabClickListener();
+        final View.OnClickListener tabClickListener = new TabClickListener();
 
         for (int i = 0; i < adapter.getCount(); i++) {
             View tabView = null;
@@ -223,6 +225,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
             if (i == mViewPager.getCurrentItem()) {
                 tabView.setSelected(true);
             }
+            tabTitleView.setTextColor(getResources().getColorStateList(R.color.selector));
+            tabTitleView.setTextSize(14);
         }
     }
 
@@ -307,7 +311,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     }
 
-    private class TabClickListener implements OnClickListener {
+    private class TabClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             for (int i = 0; i < mTabStrip.getChildCount(); i++) {

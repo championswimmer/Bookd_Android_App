@@ -14,7 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import in.tosc.bookd.topactivities.CreditsActivity;
 import in.tosc.bookd.topactivities.LibraryActivity;
+import in.tosc.bookd.topactivities.OrdersActivity;
 
 
 public class MainActivity extends ActionBarActivity
@@ -71,25 +73,25 @@ public class MainActivity extends ActionBarActivity
 //                        .commit();
 //                break;
             case 1:
-                startActivity(new Intent(MainActivity.this, LibraryActivity.class));
-                overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
+                startActivity(new Intent(MainActivity.this, OrdersActivity.class));
+                overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
                 break;
             case 2:
-                startActivity(new Intent(MainActivity.this, LibraryActivity.class));
-                overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
+                startActivity(new Intent(MainActivity.this, CreditsActivity.class));
+                overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
                 break;
 
             case 3:
                 startActivity(new Intent(MainActivity.this, LibraryActivity.class));
-                overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
+                overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
                 break;
             case 4:
                 startActivity(new Intent(MainActivity.this, LibraryActivity.class));
-                overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
+                overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
                 break;
             case 5:
                 startActivity(new Intent(MainActivity.this, LibraryActivity.class));
-                overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
+                overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
                 break;
         }
 

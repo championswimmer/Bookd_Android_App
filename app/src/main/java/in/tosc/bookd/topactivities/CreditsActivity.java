@@ -16,7 +16,7 @@ import in.tosc.bookd.ui.SlidingTabLayout;
 public class CreditsActivity extends ActionBarActivity implements ViewPager.OnPageChangeListener {
 
     private static final String TAG = CreditsActivity.class.getSimpleName();
-    private SlidingTabLayout mPagerSlidingTabStrip;
+    private SlidingTabLayout mPagerSlidingTabLayout;
     private ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
 
@@ -31,15 +31,21 @@ public class CreditsActivity extends ActionBarActivity implements ViewPager.OnPa
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mPagerSlidingTabStrip = (SlidingTabLayout) findViewById(R.id.tabs);
+        mPagerSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.tabs);
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setOffscreenPageLimit(1);
+        //mViewPager.setOffscreenPageLimit(1);
 
-        mPagerSlidingTabStrip.setOnPageChangeListener(this);
+        mPagerSlidingTabLayout.setOnPageChangeListener(this);
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
-
+        mPagerSlidingTabLayout.setDistributeEvenly(true);
         mViewPager.setAdapter(mPagerAdapter);
-        mPagerSlidingTabStrip.setViewPager(mViewPager);
+        mPagerSlidingTabLayout.setViewPager(mViewPager);
+        mPagerSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.colorAccent);
+            }
+        });
 
 
     }

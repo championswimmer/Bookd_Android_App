@@ -12,11 +12,12 @@
     <color name="Media">#5E5B52</color>
     <color name="textview_dark">#212121</color>
     <color name="textview_light">#616161</color>
+    <color name="tabTextColor">#616161</color>
 
     <!-- App Main colors -->
-    <color name="colorPrimary">#FF5722</color>
-    <color name="colorPrimaryDark">#E64A19</color>
-    <color name="colorAccent">#F44336</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorAccent">#E64A19</color>
 
     <!-- Material DEFAULT colors -->
     <color name="material_drawer_primary">#2196F3</color>
