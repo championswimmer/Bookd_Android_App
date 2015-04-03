@@ -117,8 +117,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
     public SignUpFragment showSignupDataFragment(Bundle b) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        SignUpFragment signUpFragment = new SignUpFragment();
-        signUpFragment.setArguments(b);
+        SignUpFragment signUpFragment = SignUpFragment.newInstance(b);
         transaction.replace(R.id.signon_container, signUpFragment).commit();
         return signUpFragment;
     }

@@ -24,7 +24,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="btn_parsepush"
-        android:id="@+id/button"
+        android:text="New Button"
+        android:id="@+id/btn_parsepush"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>
