@@ -16,7 +16,10 @@ import android.widget.EditText;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+
+import java.util.Arrays;
 
 /**
  * Created by prempal on 3/4/15.
@@ -82,7 +85,19 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
     }
 
     private void signInFB() {
-
+        ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(),Arrays.asList("email","user_about_me"),new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                if(parseUser.isNew()){
+                    showSignupDataFragment(null);
+                }
+                else{
+                    Intent i = new Intent(getActivity(), MainActivity.class);
+                    startActivity(i);
+                    getActivity().finish();
+                }
+            }
+        });
     }
 
     private void signIn() {

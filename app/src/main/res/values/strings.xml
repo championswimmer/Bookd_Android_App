@@ -28,4 +28,6 @@
     <string name="title_activity_orders">OrdersActivity</string>
     <string name="title_activity_sign_on">SignOnActivity</string>
 
+    <string name="facebook_app_id">xxxxxxxxxxxxxxxxxxxxxxxxxx</string>
+
 </resources>
