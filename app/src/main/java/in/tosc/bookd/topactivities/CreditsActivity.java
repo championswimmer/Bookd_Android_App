@@ -1,39 +1,105 @@
 package in.tosc.bookd.topactivities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 
+import in.tosc.bookd.credits.CreditsFragment;
 import in.tosc.bookd.R;
+import in.tosc.bookd.credits.DebitsFragment;
+import in.tosc.bookd.ui.SlidingTabLayout;
 
-public class CreditsActivity extends ActionBarActivity {
+public class CreditsActivity extends ActionBarActivity implements ViewPager.OnPageChangeListener {
+
+    private static final String TAG = CreditsActivity.class.getSimpleName();
+    private SlidingTabLayout mPagerSlidingTabStrip;
+    private ViewPager mViewPager;
+    private PagerAdapter mPagerAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credits);
+
+        Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mPagerSlidingTabStrip = (SlidingTabLayout) findViewById(R.id.tabs);
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setOffscreenPageLimit(1);
+
+        mPagerSlidingTabStrip.setOnPageChangeListener(this);
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+
+        mViewPager.setAdapter(mPagerAdapter);
+        mPagerSlidingTabStrip.setViewPager(mViewPager);
+
+
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_credits, menu);
-        return true;
+    public void onPageScrollStateChanged(int arg0) {
+        // nothing
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        // nothing
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    @Override
+    public void onPageSelected(int position) {
+
+
+    }
+
+    public class PagerAdapter extends FragmentPagerAdapter {
+
+
+        private final String[] TITLES = { "Credits", "Debits"};
+
+
+        public PagerAdapter(FragmentManager fm) {
+            super(fm);
+
         }
 
-        return super.onOptionsItemSelected(item);
+
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return TITLES[position];
+        }
+
+        @Override
+        public int getCount() {
+            return TITLES.length;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+
+            switch (position) {
+                case 0:
+                return new CreditsFragment();
+                case 1:
+                return new DebitsFragment();
+
+                default:
+                    return null;
+
+
+            }
+
+        }
+
     }
 }
