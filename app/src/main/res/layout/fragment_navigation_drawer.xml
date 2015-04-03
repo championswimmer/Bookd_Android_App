@@ -1,10 +1,77 @@
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_view"
+    android:layout_width="300dp"
     android:layout_height="match_parent"
-    android:choiceMode="singleChoice"
-    android:paddingTop="@dimen/material_drawer_padding"
-    android:divider="@android:color/transparent"
-    android:dividerHeight="0dp"
-    android:background="@android:color/white"
-    tools:context=".NavigationDrawerFragment" />
+    android:orientation="vertical"
+    android:layout_gravity="start">
+
+    <!-- Header Start -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFfafafa" >
+
+        <ImageView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_header" />
+
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignBottom="@+id/header"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_drawer" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/profile"
+            android:layout_toRightOf="@+id/profile"
+            android:text="Engifest 2015"
+            android:textColor="#fffafafa"
+            android:textSize="17.0sp"
+            />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@+id/profile"
+            android:text="DTU"
+            android:textColor="#ffe5e5e5"
+            android:textSize="14.0sp"
+            />
+
+    </RelativeLayout>
+
+    <!-- Header End -->
+
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:choiceMode="singleChoice"
+        android:id="@+id/list"
+        android:paddingTop="@dimen/material_drawer_padding"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:background="@android:color/white"
+        tools:context=".NavigationDrawerFragment" />
+
+</LinearLayout>
+

@@ -21,6 +21,39 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".topactivities.ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.tosc.bookd.MainActivity" />
+        </activity>
+        <activity
+            android:name=".topactivities.LibraryActivity"
+            android:label="@string/title_activity_library"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.tosc.bookd.MainActivity" />
+        </activity>
+        <activity
+            android:name=".topactivities.CreditsActivity"
+            android:label="@string/title_activity_credits"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.tosc.bookd.MainActivity" />
+        </activity>
+        <activity
+            android:name=".topactivities.OrdersActivity"
+            android:label="@string/title_activity_orders"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.tosc.bookd.MainActivity" />
+        </activity>
+
+        <activity
             android:name=".SignOnActivity"
             android:label="@string/title_activity_sign_on" >
             <intent-filter>
