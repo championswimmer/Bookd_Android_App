@@ -1,6 +1,7 @@
 package in.tosc.bookd;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -18,9 +19,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import in.tosc.bookd.topactivities.ProfileActivity;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -54,6 +57,7 @@ public class NavigationDrawerFragment extends Fragment {
     private ListView mDrawerListView;
     private View mFragmentContainerView;
     private ActionBarActivity actionBarActivity;
+    private RelativeLayout relativeLayout;
 
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
@@ -107,6 +111,13 @@ public class NavigationDrawerFragment extends Fragment {
                 getString(R.string.navdrawer_item_credits)
         }, actionBarActivity));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+        relativeLayout = (RelativeLayout) v.findViewById(R.id.profileLayout);
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GoToProfile(relativeLayout);
+            }
+        });
         return v;
     }
 
@@ -277,5 +288,10 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
+    }
+
+    public void GoToProfile(View v){
+        startActivity(new Intent(getActivity(), ProfileActivity.class));
+        getActivity().overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
     }
 }

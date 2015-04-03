@@ -8,9 +8,11 @@
 
     <!-- Header Start -->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/profileLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFfafafa" >
+        android:background="#FFfafafa"
+        android:onClick="GoToProfile">
 
         <ImageView
             android:id="@+id/header"
@@ -31,7 +33,7 @@
             android:layout_marginBottom="12dp"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="8dp"
-            android:src="@drawable/ic_drawer" />
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/name"
