@@ -16,9 +16,12 @@
     <string name="Social">Social</string>
     <string name="Phone">Phone</string>
     <string name="Media">Media</string>
+
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_library">LibraryActivity</string>
     <string name="title_activity_credits">CreditsActivity</string>
     <string name="title_activity_orders">OrdersActivity</string>
+    <string name="title_activity_sign_on">SignOnActivity</string>
+
 
 </resources>
