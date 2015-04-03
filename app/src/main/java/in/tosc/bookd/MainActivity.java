@@ -1,6 +1,7 @@
 package in.tosc.bookd;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import in.tosc.bookd.topactivities.LibraryActivity;
 
 
 public class MainActivity extends ActionBarActivity
@@ -58,48 +61,37 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        /*
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        //FragmentManager fragmentManager = getSupportFragmentManager();
         switch (position) {
-            case 0:
-            default:
-                mTitle = "Home";
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, Home.newInstance("Home", "H"))
-                        .commit();
-                break;
+//            case 0:
+//            default:
+//                mTitle = "Home";
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.container, Home.newInstance("Home", "H"))
+//                        .commit();
+//                break;
             case 1:
-                mTitle = "Email";
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, Email.newInstance("Email", "E"))
-                        .commit();
+                startActivity(new Intent(MainActivity.this, LibraryActivity.class));
+                overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
                 break;
             case 2:
-                mTitle = "Gallery";
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, Gallery.newInstance("Gallery", "G"))
-                        .commit();
+                startActivity(new Intent(MainActivity.this, LibraryActivity.class));
+                overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
                 break;
 
             case 3:
-                mTitle = "Social";
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, Social.newInstance("Social", "S"))
-                        .commit();
+                startActivity(new Intent(MainActivity.this, LibraryActivity.class));
+                overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
                 break;
             case 4:
-                mTitle = "Phone";
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, Phone.newInstance("Phone", "P"))
-                        .commit();
+                startActivity(new Intent(MainActivity.this, LibraryActivity.class));
+                overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
                 break;
             case 5:
-                mTitle = "Media";
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, Media.newInstance("Media", "M"))
-                        .commit();
+                startActivity(new Intent(MainActivity.this, LibraryActivity.class));
+                overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
                 break;
-        }*/
+        }
 
     }
 
