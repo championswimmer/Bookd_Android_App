@@ -31,4 +31,13 @@
         <item name="android:textColorSecondary">@android:color/white</item>
     </style>
 
+    <style name="down_up_theme" parent="AppTheme.Base">
+        <item name="android:windowAnimationStyle">@style/down_up_animation</item>
+    </style>
+
+    <style name="down_up_animation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open_scale</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_close_translate</item>
+    </style>
+
 </resources>
