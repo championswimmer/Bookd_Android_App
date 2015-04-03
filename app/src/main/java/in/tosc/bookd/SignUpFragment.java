@@ -56,7 +56,9 @@ public class SignUpFragment extends Fragment {
     }
 
     private void pushToParse(){
-        ParseUser user = new ParseUser();
+        ParseUser user = ParseUser.getCurrentUser();
+        if(user == null)
+            user = new ParseUser();
         user.setEmail(mBundle.getString(ParseTables.Users.USERNAME));
         user.setUsername(mBundle.getString(ParseTables.Users.USERNAME));
         user.setPassword(mBundle.getString(ParseTables.Users.PASSWORD));
