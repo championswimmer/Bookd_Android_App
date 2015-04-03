@@ -106,19 +106,13 @@ public class MainActivity extends ActionBarActivity
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
-                mTitle = getString(R.string.Home);
+                mTitle = getString(R.string.navdrawer_item_library);
                 break;
             case 2:
-                mTitle = getString(R.string.Email);
+                mTitle = getString(R.string.navdrawer_item_orders);
                 break;
             case 3:
-                mTitle = getString(R.string.Gallery);
-            case 4:
-                mTitle = getString(R.string.Social);
-            case 5:
-                mTitle = getString(R.string.Phone);
-            case 6:
-                mTitle = getString(R.string.Media);
+                mTitle = getString(R.string.navdrawer_item_credits);
                 break;
         }
     }

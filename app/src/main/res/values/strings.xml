@@ -17,6 +17,11 @@
     <string name="Phone">Phone</string>
     <string name="Media">Media</string>
 
+    <string name="navdrawer_item_profile">Profile</string>
+    <string name="navdrawer_item_library">Library</string>
+    <string name="navdrawer_item_credits">Credits</string>
+    <string name="navdrawer_item_orders">Orders</string>
+
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_library">LibraryActivity</string>
     <string name="title_activity_credits">CreditsActivity</string>

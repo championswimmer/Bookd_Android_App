@@ -63,22 +63,7 @@ public class NavigationDrawerAdapter extends BaseAdapter {
         navigationIcon.setBackgroundResource(R.mipmap.ic_launcher);
 
         String s = mString[pos];
-        if (s.equals("Home")) {
-            navigationIcon.setBackgroundResource(R.drawable.home);
-
-        } else if (s.equals("Email")) {
-            navigationIcon.setBackgroundResource(R.drawable.mail);
-
-        } else if (s.equals("Gallery")) {
-            navigationIcon.setBackgroundResource(R.drawable.insta);
-
-        } else if (s.equals("Social")) {
-            navigationIcon.setBackgroundResource(R.drawable.twitter);
-
-        } else if (s.equals("Phone")) {
-            navigationIcon.setBackgroundResource(R.drawable.call);
-
-        }
+        navigationIcon.setBackgroundResource(R.drawable.home);
         return rowView;
     }
 }
