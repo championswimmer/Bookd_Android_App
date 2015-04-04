@@ -53,7 +53,7 @@ public class SignUpFragment extends Fragment {
         mName = (EditText) rootView.findViewById(R.id.et_name);
         EditText username = (EditText) rootView.findViewById(R.id.et_email);
         EditText password = (EditText) rootView.findViewById(et_passwd);
-        if(mBundle == null){
+        if(mBundle.get(ParseTables.Users.USERNAME) == null){
             username.setVisibility(View.GONE);
             password.setVisibility(View.GONE);
         }
@@ -61,7 +61,8 @@ public class SignUpFragment extends Fragment {
             username.setText(mBundle.getString(ParseTables.Users.USERNAME));
             password.setText(mBundle.getString(ParseTables.Users.PASSWORD));
         }
-
+        if(mBundle.getString(ParseTables.Users.NAME) != null)
+            mName.setText(mBundle.getString(ParseTables.Users.NAME));
         Button parsePush = (Button) rootView.findViewById(R.id.btn_parsepush);
         parsePush.setOnClickListener(new View.OnClickListener() {
             @Override
