@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.util.Arrays;
-import java.util.List;
-
+import in.tosc.bookd.Utils;
 import me.dm7.barcodescanner.zbar.BarcodeFormat;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
@@ -50,8 +48,14 @@ public class ScannerActivity extends Activity implements ZBarScannerView.ResultH
         // Do something with the result here
         Log.v(TAG, "Result : " + rawResult.getContents()); // Prints scan results
         Log.v(TAG, "Result format : " + rawResult.getBarcodeFormat().getName()); // Prints scan results
-        if ((rawResult.getBarcodeFormat() == BarcodeFormat.ISBN10)
-                || (rawResult.getBarcodeFormat() == BarcodeFormat.ISBN13)) {
+        if (rawResult.getBarcodeFormat() == BarcodeFormat.ISBN10) {
+            Intent result = new Intent();
+            Log.v(TAG, "Converted Result : " + Utils.ISBN10toISBN13(rawResult.getContents()));
+            result.putExtra("ISBN", Utils.ISBN10toISBN13(rawResult.getContents()));
+            setResult(AddBookLibraryActivity.ADD_BOOK_LIBRARY_RESULT, result);
+            finish();
+
+        } else if (rawResult.getBarcodeFormat() == BarcodeFormat.ISBN13) {
             Intent result = new Intent();
             result.putExtra("ISBN", rawResult.getContents());
             setResult(AddBookLibraryActivity.ADD_BOOK_LIBRARY_RESULT, result);
