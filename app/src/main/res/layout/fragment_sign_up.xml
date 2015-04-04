@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="Name"
         android:ems="10"
         android:id="@+id/et_name"
         android:layout_gravity="center_horizontal" />
@@ -16,6 +16,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Phone"
         android:inputType="phone"
         android:ems="10"
         android:id="@+id/et_mobile"
@@ -24,7 +25,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Register"
         android:id="@+id/btn_parsepush"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>
