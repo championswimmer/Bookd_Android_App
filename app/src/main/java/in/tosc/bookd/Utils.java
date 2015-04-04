@@ -3,6 +3,7 @@ package in.tosc.bookd;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.EditText;
 
@@ -13,6 +14,12 @@ import java.util.regex.Pattern;
  * Created by prempal on 4/4/15.
  */
 public class Utils {
+
+    public static final boolean LOG_D = true;
+    public static final boolean LOG_V = true;
+
+
+    public static final String TAG = "Utils";
 
     public static String getUserEmail(Context context) {
         Pattern emailPattern = Patterns.EMAIL_ADDRESS;
@@ -50,12 +57,15 @@ public class Utils {
 
     public static String ISBN10toISBN13( String ISBN10 ) {
         String ISBN13  = ISBN10;
-        ISBN13 = "978" + ISBN13.substring(0,8);
+        ISBN13 = "978" + ISBN13.substring(0,9);
+        if (LOG_D) Log.d(TAG, "ISBN13 without sum" + ISBN13);
+        int d;
 
         int sum = 0;
         for (int i = 0; i < ISBN13.length(); i++) {
-            int d = ((i % 2 == 0) ? 1 : 3);
-            sum += ((int)ISBN13.charAt(i)) * d;
+            d = ((i % 2 == 0) ? 1 : 3);
+            sum += ((((int) ISBN13.charAt(i)) - 48) * d);
+            if (LOG_D) Log.d(TAG, "adding " + ISBN13.charAt(i) + "x" + d + "=" + ((((int) ISBN13.charAt(i)) - 48) * d));
         }
         sum = 10 - (sum % 10);
         ISBN13 += sum;

@@ -46,11 +46,11 @@ public class ScannerActivity extends Activity implements ZBarScannerView.ResultH
     @Override
     public void handleResult(Result rawResult) {
         // Do something with the result here
-        Log.v(TAG, "Result : " + rawResult.getContents()); // Prints scan results
-        Log.v(TAG, "Result format : " + rawResult.getBarcodeFormat().getName()); // Prints scan results
+        if (Utils.LOG_V) Log.v(TAG, "Result : " + rawResult.getContents()); // Prints scan results
+        if (Utils.LOG_V) Log.v(TAG, "Result format : " + rawResult.getBarcodeFormat().getName()); // Prints scan results
         if (rawResult.getBarcodeFormat() == BarcodeFormat.ISBN10) {
             Intent result = new Intent();
-            Log.v(TAG, "Converted Result : " + Utils.ISBN10toISBN13(rawResult.getContents()));
+            if (Utils.LOG_V) Log.v(TAG, "Converted Result : " + Utils.ISBN10toISBN13(rawResult.getContents()));
             result.putExtra("ISBN", Utils.ISBN10toISBN13(rawResult.getContents()));
             setResult(AddBookLibraryActivity.ADD_BOOK_LIBRARY_RESULT, result);
             finish();
