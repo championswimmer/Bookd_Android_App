@@ -24,7 +24,7 @@ public class OrdersActivity extends ActionBarActivity {
             if (toolbar != null) {
                 setSupportActionBar(toolbar);
                 toolbar.setTitle(myTitle);
-                toolbar.setTitleTextColor(getResources().getColor(android.R.color.black));
+                toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
                 getSupportActionBar().setDisplayShowTitleEnabled(true);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }

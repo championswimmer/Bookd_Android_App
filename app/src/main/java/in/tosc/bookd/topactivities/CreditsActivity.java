@@ -19,6 +19,8 @@ public class CreditsActivity extends ActionBarActivity implements ViewPager.OnPa
     private SlidingTabLayout mPagerSlidingTabLayout;
     private ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
+    Toolbar toolbar;
+    private String myTitle;
 
 
     @Override
@@ -26,10 +28,17 @@ public class CreditsActivity extends ActionBarActivity implements ViewPager.OnPa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credits);
 
-        Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        myTitle = getString(R.string.app_name);
+        if (toolbar == null) {
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            if (toolbar != null) {
+                setSupportActionBar(toolbar);
+                toolbar.setTitle(myTitle);
+                toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+                getSupportActionBar().setDisplayShowTitleEnabled(true);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
 
         mPagerSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.tabs);
         mViewPager = (ViewPager) findViewById(R.id.pager);

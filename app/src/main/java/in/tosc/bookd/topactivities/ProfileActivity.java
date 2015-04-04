@@ -25,6 +25,8 @@ public class ProfileActivity extends ActionBarActivity {
                 setSupportActionBar(toolbar);
                 toolbar.setTitle(myTitle);
                 toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+                getSupportActionBar().setDisplayShowTitleEnabled(true);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
         }
 
