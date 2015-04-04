@@ -95,9 +95,14 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
         ParseTwitterUtils.logIn(getActivity(), new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
+                boolean fullyRegistered = false;
+                try {
+                    fullyRegistered = parseUser.getBoolean(ParseTables.Users.FULLY_REGISTERED);
+                } catch (Exception ignored) {
+                }
                 if (parseUser == null) {
                     Log.d(TAG, "Uh oh. The user cancelled the Twitter login.");
-                } else if (parseUser.isNew()) {
+                } else if (!fullyRegistered) {
                     Log.d(TAG, "User signed up and logged in through Twitter!");
                     showSignupDataFragment(null);
                 } else {
@@ -120,7 +125,12 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
             public void done(ParseUser parseUser, ParseException e) {
                 Log.d(TAG, "logInWithReadPermissionsInBackground done");
                 if (e == null) {
-                    if (parseUser.isNew()) {
+                    boolean fullyRegistered = false;
+                    try {
+                        fullyRegistered = parseUser.getBoolean(ParseTables.Users.FULLY_REGISTERED);
+                    } catch (Exception ignored) {
+                    }
+                    if (!fullyRegistered) {
                         GraphRequest request = GraphRequest.newMeRequest(
                                 AccessToken.getCurrentAccessToken(),
                                 new GraphRequest.GraphJSONObjectCallback() {
@@ -128,7 +138,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                                     public void onCompleted(
                                             JSONObject object,
                                             GraphResponse response) {
-                                        // Application code
+                                        Log.d(TAG,"" +object);
                                     }
                                 });
                         Bundle parameters = new Bundle();

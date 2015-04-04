@@ -13,5 +13,6 @@ public class ParseTables {
         public static final String IMAGE = "image";
         public static final String MOBILE = "mobile";
         public static final String COVER = "cover";
+        public static final String FULLY_REGISTERED = "fullyRegistered";
     }
 }
