@@ -13,9 +13,10 @@
     <color name="textview_dark">#212121</color>
     <color name="textview_light">#616161</color>
     <color name="tabTextColor">#727272</color>
-    <color name="EditTextBackground">#aa727272</color>
     <color name="signONbackground">#aa795548</color>
     <color name="Bookd">#673AB7</color>
+    <color name="EditTextBackground">#388697</color>
+    <color name="brownText">#3E2723</color>
 
     <!-- App Main colors -->
     <color name="colorPrimary">#2196F3</color>
