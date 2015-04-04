@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import in.tosc.bookd.R;
 import in.tosc.bookd.ui.NumberedAdapter;
 
@@ -36,6 +38,9 @@ public class WishlistActivity extends ActionBarActivity {
                 R.id.wishlist_recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(new NumberedAdapter(30));
+
+        FloatingActionButton wishlistFab = (FloatingActionButton) findViewById(R.id.library_fab);
+        wishlistFab.attachToRecyclerView(recyclerView);
 
     }
 
