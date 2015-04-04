@@ -18,6 +18,8 @@ import in.tosc.bookd.MainActivity;
 import in.tosc.bookd.ParseTables;
 import in.tosc.bookd.R;
 
+import static in.tosc.bookd.R.id.et_passwd;
+
 
 public class SignUpFragment extends Fragment {
 
@@ -49,6 +51,17 @@ public class SignUpFragment extends Fragment {
         View rootView =  inflater.inflate(R.layout.fragment_sign_up, container, false);
         mPhone = (EditText) rootView.findViewById(R.id.et_mobile);
         mName = (EditText) rootView.findViewById(R.id.et_name);
+        EditText username = (EditText) rootView.findViewById(R.id.et_email);
+        EditText password = (EditText) rootView.findViewById(et_passwd);
+        if(mBundle == null){
+            username.setVisibility(View.GONE);
+            password.setVisibility(View.GONE);
+        }
+        else{
+            username.setText(mBundle.getString(ParseTables.Users.USERNAME));
+            password.setText(mBundle.getString(ParseTables.Users.PASSWORD));
+        }
+
         Button parsePush = (Button) rootView.findViewById(R.id.btn_parsepush);
         parsePush.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +81,7 @@ public class SignUpFragment extends Fragment {
         user.setPassword(mBundle.getString(ParseTables.Users.PASSWORD));
         user.put(ParseTables.Users.NAME, mName.getText().toString());
         user.put(ParseTables.Users.MOBILE, mPhone.getText().toString());
+        user.put(ParseTables.Users.FULLY_REGISTERED, true);
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
