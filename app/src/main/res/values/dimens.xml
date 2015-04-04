@@ -36,7 +36,7 @@
     <dimen name="tool_bar_top_padding">0dp</dimen>
     <dimen name="margin_book_item">20dp</dimen>
     <dimen name="padding_book_recyclerview">20dp</dimen>
-    <dimen name="column_width_book_recyclerview">150dp</dimen>
+    <dimen name="column_width_book_recyclerview">300dp</dimen>
 
     <dimen name="signin_button_margin">5dp</dimen>
     <dimen name="signin_button_size">70dp</dimen>
