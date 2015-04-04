@@ -2,6 +2,7 @@ package in.tosc.bookd.signon;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.parse.ParseException;
@@ -20,6 +20,7 @@ import com.parse.SignUpCallback;
 import in.tosc.bookd.MainActivity;
 import in.tosc.bookd.ParseTables;
 import in.tosc.bookd.R;
+import in.tosc.bookd.ui.MaterialEditText;
 
 import static in.tosc.bookd.R.id.et_passwd;
 
@@ -27,8 +28,10 @@ import static in.tosc.bookd.R.id.et_passwd;
 public class SignUpFragment extends Fragment {
 
     Bundle mBundle;
-    EditText mName;
-    EditText mPhone;
+    MaterialEditText mName;
+    MaterialEditText mPhone;
+    private Typeface typeface;
+    private Typeface secondTypface;
 
     public static SignUpFragment newInstance(Bundle bundle) {
         SignUpFragment fragment = new SignUpFragment();
@@ -52,10 +55,16 @@ public class SignUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_sign_up, container, false);
-        mPhone = (EditText) rootView.findViewById(R.id.et_mobile);
-        mName = (EditText) rootView.findViewById(R.id.et_name);
-        EditText username = (EditText) rootView.findViewById(R.id.et_email);
-        EditText password = (EditText) rootView.findViewById(et_passwd);
+        typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Lobster-Regular.ttf");
+        secondTypface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/RobotoCondensed-Regular.ttf");
+        mPhone = (MaterialEditText) rootView.findViewById(R.id.et_mobile);
+        mName = (MaterialEditText) rootView.findViewById(R.id.et_name);
+        MaterialEditText username = (MaterialEditText) rootView.findViewById(R.id.et_email);
+        MaterialEditText password = (MaterialEditText) rootView.findViewById(et_passwd);
+        mPhone.setTypeface(typeface);
+        mName.setTypeface(typeface);
+        username.setTypeface(typeface);
+        password.setTypeface(typeface);
         SimpleDraweeView profile = (SimpleDraweeView) rootView.findViewById(R.id.profile);
         if(mBundle.getString(ParseTables.Users.IMAGE)!=null){
             Log.d("sfg","dsgsdgsdg");
@@ -78,6 +87,7 @@ public class SignUpFragment extends Fragment {
         if(mBundle.getString(ParseTables.Users.NAME) != null)
             mName.setText(mBundle.getString(ParseTables.Users.NAME));
         Button parsePush = (Button) rootView.findViewById(R.id.btn_parsepush);
+        parsePush.setTypeface(secondTypface);
         parsePush.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
