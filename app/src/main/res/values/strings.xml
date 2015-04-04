@@ -35,4 +35,9 @@
     <string name="title_activity_add_book_library">AddBookLibraryActivity</string>
     <string name="title_activity_add_book_wishlist">AddBookWishlistActivity</string>
 
+    <string name="sample_book_title">Sample Book Title</string>
+    <string name="sample_book_author">Sample Book Author</string>
+    <string name="sample_book_publisher">Sample Book Publisher</string>
+    <string name="sample_book_summary">Sample Book Summary Sample Book SummarySample Book SummarySample Book SummarySample Book SummarySample Book SummarySample Book SummarySample Book SummarySample Book SummarySample Book SummarySample Book Summary</string>
+
 </resources>

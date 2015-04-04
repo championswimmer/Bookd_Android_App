@@ -1,16 +1,19 @@
 package in.tosc.bookd.topactivities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.melnykov.fab.FloatingActionButton;
 
 import in.tosc.bookd.R;
 import in.tosc.bookd.ui.NumberedAdapter;
+import in.tosc.bookd.utilactivities.AddBookLibraryActivity;
 
 public class LibraryActivity extends ActionBarActivity {
 
@@ -41,6 +44,14 @@ public class LibraryActivity extends ActionBarActivity {
 
         FloatingActionButton libraryFab = (FloatingActionButton) findViewById(R.id.library_fab);
         libraryFab.attachToRecyclerView(recyclerView);
+
+        libraryFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), AddBookLibraryActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
