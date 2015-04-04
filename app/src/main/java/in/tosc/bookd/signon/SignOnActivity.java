@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,6 +16,9 @@ import in.tosc.bookd.R;
 
 public class SignOnActivity extends ActionBarActivity {
 
+    Toolbar toolbar;
+    private String myTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +27,17 @@ public class SignOnActivity extends ActionBarActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         SignOnFragment fragment = new SignOnFragment();
         transaction.replace(R.id.signon_container, fragment,"SignOnFragment").commit();
+
+        myTitle = getString(R.string.title_activity_sign_on);
+        if (toolbar == null) {
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            if (toolbar != null) {
+                setSupportActionBar(toolbar);
+                toolbar.setTitle(myTitle);
+                toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+            }
+        }
+
     }
 
 
