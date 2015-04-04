@@ -23,6 +23,7 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -118,7 +119,6 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
     private void signInFB() {
         List<String> permissions = Arrays.asList(
                 "public_profile",
-                "user_friends",
                 "email");
         ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(), permissions, new LogInCallback() {
             @Override
@@ -139,10 +139,20 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                                             JSONObject object,
                                             GraphResponse response) {
                                         Log.d(TAG,"" +object);
+                                        try {
+                                            if(!object.isNull("cover"))
+                                                Log.d("dsf", object.getJSONObject("cover").getString("source"));
+                                            if(!object.isNull("email"))
+                                                Log.d("dsf", object.getString("email"));
+                                            Log.d("dsf", object.getJSONObject("picture").getJSONObject("data").getString("url"));
+                                            Log.d("dsf", object.getString("name"));
+                                        } catch (JSONException e1) {
+                                            e1.printStackTrace();
+                                        }
                                     }
                                 });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "picture,cover");
+                        parameters.putString("fields", "name,email,picture,cover");
                         request.setParameters(parameters);
                         request.executeAsync();
                         showSignupDataFragment(null);
