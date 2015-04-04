@@ -2,6 +2,7 @@ package in.tosc.bookd.signon;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,11 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.melnykov.fab.FloatingActionButton;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
@@ -33,6 +35,7 @@ import in.tosc.bookd.MainActivity;
 import in.tosc.bookd.ParseTables;
 import in.tosc.bookd.R;
 import in.tosc.bookd.Utils;
+import in.tosc.bookd.ui.MaterialEditText;
 
 /**
  * Created by prempal on 3/4/15.
@@ -40,8 +43,10 @@ import in.tosc.bookd.Utils;
 public class SignOnFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "SignOnFragment";
-    private EditText mUsername;
-    private EditText mPassword;
+    private MaterialEditText mUsername;
+    private MaterialEditText mPassword;
+    private TextView mTextview;
+    private Typeface typeface;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,13 +65,19 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_signon, container, false);
-        mUsername = (EditText) rootView.findViewById(R.id.et_username);
-        mPassword = (EditText) rootView.findViewById(R.id.et_password);
+        mUsername = (MaterialEditText) rootView.findViewById(R.id.et_username);
+        mPassword = (MaterialEditText) rootView.findViewById(R.id.et_password);
         Button signup = (Button) rootView.findViewById(R.id.btn_signup);
         Button signin = (Button) rootView.findViewById(R.id.btn_signin);
-        Button fb_login = (Button) rootView.findViewById(R.id.btn_facebook);
-        Button twitter_login = (Button) rootView.findViewById(R.id.btn_twitter);
+
         mUsername.setText(Utils.getUserEmail(getActivity()));
+
+        FloatingActionButton fb_login = (FloatingActionButton) rootView.findViewById(R.id.btn_facebook);
+        FloatingActionButton twitter_login = (FloatingActionButton) rootView.findViewById(R.id.btn_twitter);
+        mTextview = (TextView) rootView.findViewById(R.id.Bookd_text);
+        typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Lobster-Regular.ttf");
+        mTextview.setTypeface(typeface);
+
 
         signup.setOnClickListener(this);
         signin.setOnClickListener(this);
