@@ -18,6 +18,8 @@ import in.tosc.bookd.MainActivity;
 import in.tosc.bookd.ParseTables;
 import in.tosc.bookd.R;
 
+import static in.tosc.bookd.R.id.et_passwd;
+
 
 public class SignUpFragment extends Fragment {
 
@@ -49,6 +51,10 @@ public class SignUpFragment extends Fragment {
         View rootView =  inflater.inflate(R.layout.fragment_sign_up, container, false);
         mPhone = (EditText) rootView.findViewById(R.id.et_mobile);
         mName = (EditText) rootView.findViewById(R.id.et_name);
+        EditText username = (EditText) rootView.findViewById(R.id.et_email);
+        EditText password = (EditText) rootView.findViewById(et_passwd);
+        username.setText(mBundle.getString(ParseTables.Users.USERNAME));
+        password.setText(mBundle.getString(ParseTables.Users.PASSWORD));
         Button parsePush = (Button) rootView.findViewById(R.id.btn_parsepush);
         parsePush.setOnClickListener(new View.OnClickListener() {
             @Override
