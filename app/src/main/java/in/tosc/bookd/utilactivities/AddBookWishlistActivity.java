@@ -1,15 +1,20 @@
 package in.tosc.bookd.utilactivities;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.ParseUser;
+
 import java.util.concurrent.ExecutionException;
 
+import in.tosc.bookd.ParseTables;
 import in.tosc.bookd.R;
 import in.tosc.bookd.bookapi.BookObject;
 import in.tosc.bookd.bookapi.GetBookInfo;
@@ -22,6 +27,7 @@ public class AddBookWishlistActivity extends ActionBarActivity {
 
     ImageView imageBook;
     TextView tvBookTitle, tvBookAuthor, tvBookPublisher, tvBookSummary;
+    Button addWishlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,7 @@ public class AddBookWishlistActivity extends ActionBarActivity {
         tvBookAuthor = (TextView) findViewById(R.id.tv_book_author);
         tvBookPublisher = (TextView) findViewById(R.id.tv_book_publisher);
         tvBookSummary = (TextView) findViewById(R.id.tv_book_summary);
+        addWishlist = (Button) findViewById(R.id.btn_addwishlist);
 
         Intent scan = new Intent(this, ScannerActivity.class);
         startActivityForResult(scan, ADD_BOOK_WISHLIST_RESULT);
@@ -56,6 +63,15 @@ public class AddBookWishlistActivity extends ActionBarActivity {
                 tvBookAuthor.setText(bookObject.getAuthor());
                 tvBookPublisher.setText(bookObject.getPublisher());
                 tvBookSummary.setText(bookObject.getSummary());
+                addWishlist.setVisibility(View.VISIBLE);
+                addWishlist.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ParseUser pUser = ParseUser.getCurrentUser();
+                        pUser.add(ParseTables.Users.WISHLIST,bookObject.getIsbn());
+                        pUser.saveEventually();
+                    }
+                });
                 //TODO: Also need to set the book image
             }
             //TODO: What if we do not get a result ?? Do something about that too

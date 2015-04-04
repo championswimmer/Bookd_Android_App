@@ -81,7 +81,7 @@ public class AddBookLibraryActivity extends ActionBarActivity {
                     @Override
                     public void onClick(View view) {
                         ParseUser pUser = ParseUser.getCurrentUser();
-                        pUser.add(ParseTables.Users.BOOKS,bookObject.getIsbn());
+                        pUser.add(ParseTables.Users.LIBRARY,bookObject.getIsbn());
                         pUser.saveEventually();
                     }
                 });
