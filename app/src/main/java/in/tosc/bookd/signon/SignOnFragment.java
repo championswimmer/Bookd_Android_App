@@ -162,7 +162,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                                     }
                                 });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "name,email,id,cover");
+                        parameters.putString("fields", "name,id,cover");
                         request.setParameters(parameters);
                         request.executeAsync();
                     } else {
