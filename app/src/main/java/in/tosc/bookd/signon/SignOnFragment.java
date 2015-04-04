@@ -14,11 +14,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -105,16 +110,36 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
     }
 
     private void signInFB() {
-        ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(), Arrays.asList("email", "user_about_me"), new LogInCallback() {
+        ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(), Arrays.asList("email"), new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
-                if (parseUser.isNew()) {
-                    showSignupDataFragment(null);
-                } else {
-                    Intent i = new Intent(getActivity(), MainActivity.class);
-                    startActivity(i);
-                    getActivity().finish();
+                if(e != null){
+                    if (parseUser.isNew()) {
+                        GraphRequest request = GraphRequest.newMeRequest(
+                                AccessToken.getCurrentAccessToken(),
+                                new GraphRequest.GraphJSONObjectCallback() {
+                                    @Override
+                                    public void onCompleted(
+                                            JSONObject object,
+                                            GraphResponse response) {
+                                        // Application code
+                                    }
+                                });
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields", "id,name,link");
+                        request.setParameters(parameters);
+                        request.executeAsync();
+                        showSignupDataFragment(null);
+                    } else {
+                        Intent i = new Intent(getActivity(), MainActivity.class);
+                        startActivity(i);
+                        getActivity().finish();
+                    }
                 }
+                else{
+                    e.printStackTrace();
+                }
+
             }
         });
     }
