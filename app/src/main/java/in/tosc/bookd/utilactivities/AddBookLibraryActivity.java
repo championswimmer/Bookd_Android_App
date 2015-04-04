@@ -1,6 +1,7 @@
 package in.tosc.bookd.utilactivities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.concurrent.ExecutionException;
 
@@ -24,7 +27,7 @@ public class AddBookLibraryActivity extends ActionBarActivity {
 
     BookObject bookObject;
 
-    ImageView imageBook;
+    SimpleDraweeView imageBook;
     TextView tvBookTitle, tvBookAuthor, tvBookPublisher, tvBookSummary;
 
     @Override
@@ -32,7 +35,7 @@ public class AddBookLibraryActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book_library);
 
-        imageBook = (ImageView) findViewById(R.id.image_book);
+        imageBook = (SimpleDraweeView) findViewById(R.id.image_book);
         tvBookTitle = (TextView) findViewById(R.id.tv_book_title);
         tvBookAuthor = (TextView) findViewById(R.id.tv_book_author);
         tvBookPublisher = (TextView) findViewById(R.id.tv_book_publisher);
@@ -64,6 +67,8 @@ public class AddBookLibraryActivity extends ActionBarActivity {
                 tvBookPublisher.setText(bookObject.getPublisher());
                 tvBookSummary.setText(bookObject.getSummary());
                 //TODO: Also need to set the book image
+                Uri bookImageUri = Uri.parse(bookObject.getImage());
+                imageBook.setImageURI(bookImageUri);
             } else {
                 //TODO: What if we do not get a result ?? Do something about that too
                 if (Utils.LOG_V) Log.v(TAG, "bookObject is not returned");

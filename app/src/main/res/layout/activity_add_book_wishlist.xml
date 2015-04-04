@@ -24,11 +24,11 @@
                 android:layout_height="wrap_content">
 
 
-                <ImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:layout_weight="3"
                     android:id="@+id/image_book"
                     android:layout_centerInParent="true"
-                    android:background="@mipmap/ic_sample_book"
+                    android:background="@drawable/sample_book_placeholder"
                     android:layout_width="170dp"
                     android:layout_height="170dp" />
 
