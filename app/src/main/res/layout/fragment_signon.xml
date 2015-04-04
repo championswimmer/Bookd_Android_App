@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fab="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <TextView
         android:id="@+id/Bookd_text"
@@ -65,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/bbuton_primary_rounded"
-            android:text="Signup"
+            android:text="Sign Up"
             android:textColor="@android:color/white"
             android:layout_marginRight="50dp"/>
 
@@ -76,7 +77,7 @@
             android:layout_gravity="center_horizontal"
             android:textColor="@android:color/white"
             android:background="@drawable/bbuton_primary_rounded"
-            android:text="Signin" />
+            android:text="Sign In" />
     </LinearLayout>
 
     <LinearLayout
@@ -94,7 +95,8 @@
             android:src="@drawable/ic_action_facebook"
             fab:fab_colorNormal="@color/button_normal"
             fab:fab_colorPressed="@color/button_normal_pressed"
-            fab:fab_colorRipple="@color/colorAccent"
+            fab:fab_colorRipple="@color/button_normal_pressed"
+            fab:fab_shadow="true"
             android:layout_marginRight="70dp"/>
 
         <com.melnykov.fab.FloatingActionButton
@@ -105,6 +107,7 @@
             android:src="@drawable/ic_action_twitter"
             fab:fab_colorNormal="@color/button_normal"
             fab:fab_colorPressed="@color/button_normal_pressed"
-            fab:fab_colorRipple="@color/colorAccent" />
+            fab:fab_colorRipple="@color/button_normal_pressed"
+            fab:fab_shadow="true"/>
     </LinearLayout>
 </LinearLayout>

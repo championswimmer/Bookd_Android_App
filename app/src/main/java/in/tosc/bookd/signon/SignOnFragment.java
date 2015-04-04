@@ -47,6 +47,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
     private MaterialEditText mPassword;
     private TextView mTextview;
     private Typeface typeface;
+    private Typeface secondTypface;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,15 +77,22 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
         FloatingActionButton twitter_login = (FloatingActionButton) rootView.findViewById(R.id.btn_twitter);
         mTextview = (TextView) rootView.findViewById(R.id.Bookd_text);
         typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Lobster-Regular.ttf");
+        secondTypface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/RobotoCondensed-Regular.ttf");
         mTextview.setTypeface(typeface);
         mPassword.setTypeface(typeface);
         mUsername.setTypeface(typeface);
-        fb_login.setColorNormal(R.color.button_normal);
-        fb_login.setColorPressed(R.color.button_normal_pressed);
-        fb_login.setColorRipple(R.color.colorAccent);
-        twitter_login.setColorNormal(R.color.button_normal);
-        twitter_login.setColorPressed(R.color.button_normal_pressed);
-        twitter_login.setColorRipple(R.color.colorAccent);
+        signin.setTypeface(secondTypface);
+        signup.setTypeface(secondTypface);
+//        fb_login.setColorNormal(R.color.button_normal);
+//        fb_login.setColorPressed(R.color.button_normal_pressed);
+//        fb_login.setColorRipple(R.color.colorAccent);
+//        fb_login.setImageResource(R.drawable.ic_action_facebook);
+        fb_login.setShadow(true);
+//        twitter_login.setColorNormal(R.color.button_normal);
+//        twitter_login.setColorPressed(R.color.button_normal_pressed);
+//        twitter_login.setColorRipple(R.color.colorAccent);
+//        twitter_login.setImageResource(R.drawable.ic_action_twitter);
+        twitter_login.setShadow(true);
 
         signup.setOnClickListener(this);
         signin.setOnClickListener(this);
