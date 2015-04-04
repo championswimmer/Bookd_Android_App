@@ -9,6 +9,26 @@ public class BookObject {
     String author;
     String publisher;
     String summary;
+    String category;
+    String rating;
+    String image;
+    String isbn;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
 
     public String getTitle() {
         return title;
