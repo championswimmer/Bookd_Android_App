@@ -19,6 +19,7 @@
 
     <string name="navdrawer_item_profile">Profile</string>
     <string name="navdrawer_item_library">Library</string>
+    <string name="navdrawer_item_wishlist">Wishlist</string>
     <string name="navdrawer_item_credits">Credits</string>
     <string name="navdrawer_item_orders">Orders</string>
 
@@ -30,5 +31,6 @@
 
     <string name="facebook_app_id">xxxxxxxxxxxxxxxxxxxxxxxxxx</string>
     <string name="title_find_books">Find books</string>
+    <string name="title_activity_wishlist">WishlistActivity</string>
 
 </resources>

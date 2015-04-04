@@ -53,7 +53,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.tosc.bookd.MainActivity" />
         </activity>
-
         <activity
             android:name=".SignOnActivity"
             android:label="@string/title_activity_sign_on" >
@@ -63,9 +62,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ScannerActivity"
-            android:label="Scanner">
+        <activity
+            android:name=".ScannerActivity"
+            android:label="Scanner" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -75,8 +74,16 @@
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+            android:value="@string/facebook_app_id" />
 
+        <activity
+            android:name=".topactivities.WishlistActivity"
+            android:label="@string/title_activity_wishlist"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.tosc.bookd.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

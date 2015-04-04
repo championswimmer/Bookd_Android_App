@@ -107,6 +107,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         mDrawerListView.setAdapter(new NavigationDrawerAdapter(new String[]{
                 getString(R.string.navdrawer_item_library),
+                getString(R.string.navdrawer_item_wishlist),
                 getString(R.string.navdrawer_item_orders),
                 getString(R.string.navdrawer_item_credits)
         }, actionBarActivity));

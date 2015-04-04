@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import in.tosc.bookd.topactivities.CreditsActivity;
 import in.tosc.bookd.topactivities.LibraryActivity;
 import in.tosc.bookd.topactivities.OrdersActivity;
+import in.tosc.bookd.topactivities.WishlistActivity;
 
 
 public class MainActivity extends ActionBarActivity
@@ -73,21 +74,17 @@ public class MainActivity extends ActionBarActivity
                 break;
 
             case 1:
-                startActivity(new Intent(MainActivity.this, OrdersActivity.class));
+                startActivity(new Intent(MainActivity.this, WishlistActivity.class));
                 overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
                 break;
 
             case 2:
-                startActivity(new Intent(MainActivity.this, CreditsActivity.class));
+                startActivity(new Intent(MainActivity.this, OrdersActivity.class));
                 overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
                 break;
 
-            case 4:
-                startActivity(new Intent(MainActivity.this, LibraryActivity.class));
-                overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
-                break;
-            case 5:
-                startActivity(new Intent(MainActivity.this, LibraryActivity.class));
+            case 3:
+                startActivity(new Intent(MainActivity.this, CreditsActivity.class));
                 overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
                 break;
         }
@@ -100,9 +97,12 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.navdrawer_item_library);
                 break;
             case 1:
-                mTitle = getString(R.string.navdrawer_item_orders);
+                mTitle = getString(R.string.navdrawer_item_wishlist);
                 break;
             case 2:
+                mTitle = getString(R.string.navdrawer_item_orders);
+                break;
+            case 3:
                 mTitle = getString(R.string.navdrawer_item_credits);
                 break;
             default:
