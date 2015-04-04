@@ -46,9 +46,7 @@ public class AddBookLibraryActivity extends ActionBarActivity {
             GetBookInfo gbi = new GetBookInfo(getApplicationContext());
             try {
                 bookObject = gbi.execute(data.getStringExtra("ISBN")).get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
+            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
 
