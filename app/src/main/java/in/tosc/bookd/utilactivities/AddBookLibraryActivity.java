@@ -3,6 +3,7 @@ package in.tosc.bookd.utilactivities;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -11,10 +12,13 @@ import android.widget.TextView;
 import java.util.concurrent.ExecutionException;
 
 import in.tosc.bookd.R;
+import in.tosc.bookd.Utils;
 import in.tosc.bookd.bookapi.BookObject;
 import in.tosc.bookd.bookapi.GetBookInfo;
 
 public class AddBookLibraryActivity extends ActionBarActivity {
+
+    public static final String TAG = "AddBookLibraryActivity";
 
     public static final int ADD_BOOK_LIBRARY_RESULT = 10;
 
@@ -42,6 +46,7 @@ public class AddBookLibraryActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ADD_BOOK_LIBRARY_RESULT) {
+            if (Utils.LOG_V) Log.v(TAG, "result returned from scanner");
 
             GetBookInfo gbi = new GetBookInfo(getApplicationContext());
             try {
@@ -51,13 +56,19 @@ public class AddBookLibraryActivity extends ActionBarActivity {
             }
 
             if (bookObject != null) {
+                if (Utils.LOG_V) Log.v(TAG, "bookObject is returned"
+                        + "title" + bookObject.getTitle()
+                        + "author" + bookObject.getAuthor());
                 tvBookTitle.setText(bookObject.getTitle());
                 tvBookAuthor.setText(bookObject.getAuthor());
                 tvBookPublisher.setText(bookObject.getPublisher());
                 tvBookSummary.setText(bookObject.getSummary());
                 //TODO: Also need to set the book image
+            } else {
+                //TODO: What if we do not get a result ?? Do something about that too
+                if (Utils.LOG_V) Log.v(TAG, "bookObject is not returned");
+
             }
-            //TODO: What if we do not get a result ?? Do something about that too
 
         }
     }
