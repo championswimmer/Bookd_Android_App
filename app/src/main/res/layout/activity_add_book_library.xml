@@ -30,6 +30,7 @@
                     android:id="@+id/image_book"
                     android:layout_centerInParent="true"
                     fresco:placeholderImage="@drawable/sample_book_placeholder"
+                    fresco:actualImageScaleType="centerInside"
                     android:layout_width="170dp"
                     android:layout_height="170dp" />
 
