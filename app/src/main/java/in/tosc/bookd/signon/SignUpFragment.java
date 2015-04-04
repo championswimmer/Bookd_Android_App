@@ -1,4 +1,4 @@
-package in.tosc.bookd;
+package in.tosc.bookd.signon;
 
 
 import android.content.Intent;
@@ -13,6 +13,10 @@ import android.widget.EditText;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import in.tosc.bookd.MainActivity;
+import in.tosc.bookd.ParseTables;
+import in.tosc.bookd.R;
 
 
 public class SignUpFragment extends Fragment {

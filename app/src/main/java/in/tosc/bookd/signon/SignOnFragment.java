@@ -1,4 +1,4 @@
-package in.tosc.bookd;
+package in.tosc.bookd.signon;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -21,6 +21,10 @@ import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 
 import java.util.Arrays;
+
+import in.tosc.bookd.MainActivity;
+import in.tosc.bookd.ParseTables;
+import in.tosc.bookd.R;
 
 /**
  * Created by prempal on 3/4/15.

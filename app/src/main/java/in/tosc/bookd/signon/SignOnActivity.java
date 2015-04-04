@@ -1,4 +1,4 @@
-package in.tosc.bookd;
+package in.tosc.bookd.signon;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.parse.ParseFacebookUtils;
+
+import in.tosc.bookd.R;
 
 
 public class SignOnActivity extends ActionBarActivity {
