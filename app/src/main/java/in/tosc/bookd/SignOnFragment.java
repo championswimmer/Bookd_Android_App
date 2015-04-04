@@ -17,6 +17,7 @@ import android.widget.EditText;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 
 import java.util.Arrays;
@@ -81,17 +82,31 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
     }
 
     private void signInTwitter() {
-
+        ParseTwitterUtils.logIn(getActivity(), new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                if (parseUser == null) {
+                    Log.d(TAG, "Uh oh. The user cancelled the Twitter login.");
+                } else if (parseUser.isNew()) {
+                    Log.d(TAG, "User signed up and logged in through Twitter!");
+                    showSignupDataFragment(null);
+                } else {
+                    Log.d(TAG, "User logged in through Twitter!");
+                    Intent i = new Intent(getActivity(), MainActivity.class);
+                    startActivity(i);
+                    getActivity().finish();
+                }
+            }
+        });
     }
 
     private void signInFB() {
-        ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(),Arrays.asList("email","user_about_me"),new LogInCallback() {
+        ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(), Arrays.asList("email", "user_about_me"), new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
-                if(parseUser.isNew()){
+                if (parseUser.isNew()) {
                     showSignupDataFragment(null);
-                }
-                else{
+                } else {
                     Intent i = new Intent(getActivity(), MainActivity.class);
                     startActivity(i);
                     getActivity().finish();
