@@ -5,6 +5,38 @@ package in.tosc.bookd.bookapi;
  */
 public class BookObject {
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
     String title;
     String author;
     String publisher;

@@ -39,14 +39,14 @@ public class GetBookInfo extends AsyncTask<String, Void, BookObject> {
             Log.d("Response", response);
             JSONObject jsonObject = new JSONObject(response);
             bookObject = new BookObject();
-            bookObject.author = jsonObject.getString("author");
-            bookObject.category = jsonObject.getString("category");
-            bookObject.image = jsonObject.getString("image");
-            bookObject.isbn = jsonObject.getString("isbn");
-            bookObject.publisher = jsonObject.getString("publisher");
-            bookObject.rating = jsonObject.getString("rating");
-            bookObject.summary = jsonObject.getString("summary");
-            bookObject.title = jsonObject.getString("title");
+            bookObject.setAuthor(jsonObject.getString("author"));
+            bookObject.setCategory(jsonObject.getString("category"));
+            bookObject.setImage(jsonObject.getString("image"));
+            bookObject.setIsbn(jsonObject.getString("isbn"));
+            bookObject.setPublisher(jsonObject.getString("publisher"));
+            bookObject.setRating(jsonObject.getString("rating"));
+            bookObject.setSummary(jsonObject.getString("summary"));
+            bookObject.setTitle(jsonObject.getString("title"));
         } catch (Exception e){
 
         }
