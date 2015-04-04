@@ -34,6 +34,7 @@ public class Utils {
         return false;
     }
 
+
     public static boolean isEmailValid(String email) {
         boolean isValid = false;
 
@@ -45,5 +46,20 @@ public class Utils {
             isValid = true;
         }
         return isValid;
+    }
+
+    public static String ISBN10toISBN13( String ISBN10 ) {
+        String ISBN13  = ISBN10;
+        ISBN13 = "978" + ISBN13.substring(0,8);
+
+        int sum = 0;
+        for (int i = 0; i < ISBN13.length(); i++) {
+            int d = ((i % 2 == 0) ? 1 : 3);
+            sum += ((int)ISBN13.charAt(i)) * d;
+        }
+        sum = 10 - (sum % 10);
+        ISBN13 += sum;
+
+        return ISBN13;
     }
 }

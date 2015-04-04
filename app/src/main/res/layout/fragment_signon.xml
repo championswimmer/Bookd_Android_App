@@ -13,14 +13,13 @@
         android:layout_gravity="center"
         android:background="@android:color/transparent"
         android:gravity="center"
-        android:text="Bookd"
+        android:text="@string/app_name_signON"
         android:textSize="35sp"
         android:textColor="@android:color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/EditTextBackground"
         android:orientation="vertical">
 
         <in.tosc.bookd.ui.MaterialEditText
@@ -34,7 +33,8 @@
             android:padding="5dp"
             android:singleLine="true"
             app:baseColor="@color/white"
-            app:primaryColor="@color/white" />
+            app:primaryColor="@color/white"
+            android:textSize="20sp"/>
 
         <in.tosc.bookd.ui.MaterialEditText
             android:id="@+id/et_password"
@@ -48,7 +48,8 @@
             android:padding="5dp"
             android:singleLine="true"
             app:baseColor="@color/white"
-            app:primaryColor="@color/white" />
+            app:primaryColor="@color/white"
+            android:textSize="20sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -91,8 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:src="@drawable/ic_action_facebook"
-            fab:fab_colorNormal="@color/colorPrimary"
-            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_colorNormal="@color/button_normal"
+            fab:fab_colorPressed="@color/button_normal_pressed"
             fab:fab_colorRipple="@color/colorAccent"
             android:layout_marginRight="70dp"/>
 
@@ -102,8 +103,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
             android:src="@drawable/ic_action_twitter"
-            fab:fab_colorNormal="@color/colorPrimary"
-            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_colorNormal="@color/button_normal"
+            fab:fab_colorPressed="@color/button_normal_pressed"
             fab:fab_colorRipple="@color/colorAccent" />
     </LinearLayout>
 </LinearLayout>
