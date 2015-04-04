@@ -32,6 +32,7 @@ import java.util.List;
 import in.tosc.bookd.MainActivity;
 import in.tosc.bookd.ParseTables;
 import in.tosc.bookd.R;
+import in.tosc.bookd.Utils;
 
 /**
  * Created by prempal on 3/4/15.
@@ -65,6 +66,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
         Button signin = (Button) rootView.findViewById(R.id.btn_signin);
         Button fb_login = (Button) rootView.findViewById(R.id.btn_facebook);
         Button twitter_login = (Button) rootView.findViewById(R.id.btn_twitter);
+        mUsername.setText(Utils.getUserEmail(getActivity()));
 
         signup.setOnClickListener(this);
         signin.setOnClickListener(this);
@@ -97,10 +99,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
             @Override
             public void done(ParseUser parseUser, ParseException e) {
                 boolean fullyRegistered = false;
-                try {
-                    fullyRegistered = parseUser.getBoolean(ParseTables.Users.FULLY_REGISTERED);
-                } catch (Exception ignored) {
-                }
+                fullyRegistered = parseUser.getBoolean(ParseTables.Users.FULLY_REGISTERED);
                 if (parseUser == null) {
                     Log.d(TAG, "Uh oh. The user cancelled the Twitter login.");
                 } else if (!fullyRegistered) {
@@ -131,6 +130,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                     } catch (Exception ignored) {
                     }
                     if (!fullyRegistered) {
+                        final Bundle b = new Bundle();
                         GraphRequest request = GraphRequest.newMeRequest(
                                 AccessToken.getCurrentAccessToken(),
                                 new GraphRequest.GraphJSONObjectCallback() {
@@ -141,11 +141,12 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                                         Log.d(TAG,"" +object);
                                         try {
                                             if(!object.isNull("cover"))
-                                                Log.d("dsf", object.getJSONObject("cover").getString("source"));
+                                                b.putString(ParseTables.Users.COVER,object.getJSONObject("cover").getString("source"));
                                             if(!object.isNull("email"))
                                                 Log.d("dsf", object.getString("email"));
-                                            Log.d("dsf", object.getJSONObject("picture").getJSONObject("data").getString("url"));
-                                            Log.d("dsf", object.getString("name"));
+                                            b.putString(ParseTables.Users.IMAGE,object.getJSONObject("picture").getJSONObject("data").getString("url"));
+                                            b.putString(ParseTables.Users.NAME, object.getString("name"));
+                                            showSignupDataFragment(b);
                                         } catch (JSONException e1) {
                                             e1.printStackTrace();
                                         }
@@ -155,7 +156,6 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                         parameters.putString("fields", "name,email,picture,cover");
                         request.setParameters(parameters);
                         request.executeAsync();
-                        showSignupDataFragment(null);
                     } else {
                         Intent i = new Intent(getActivity(), MainActivity.class);
                         startActivity(i);
@@ -170,25 +170,28 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
     }
 
     private void signIn() {
-        ParseUser.logInInBackground(
-                mUsername.getText().toString(),
-                mPassword.getText().toString(),
-                new LogInCallback() {
-                    @Override
-                    public void done(ParseUser parseUser, ParseException e) {
-                        if (parseUser != null) {
-                            Intent i = new Intent(getActivity(), MainActivity.class);
-                            startActivity(i);
-                        } else {
-                            new AlertDialog.Builder(getActivity())
-                                    .setTitle("Login failed")
-                                    .setCancelable(true)
-                                    .setMessage("Try again!")
-                                    .show();
+        boolean isValid = validate();
+        if(isValid){
+            ParseUser.logInInBackground(
+                    mUsername.getText().toString(),
+                    mPassword.getText().toString(),
+                    new LogInCallback() {
+                        @Override
+                        public void done(ParseUser parseUser, ParseException e) {
+                            if (parseUser != null) {
+                                Intent i = new Intent(getActivity(), MainActivity.class);
+                                startActivity(i);
+                            } else {
+                                new AlertDialog.Builder(getActivity())
+                                        .setTitle("Login failed")
+                                        .setCancelable(true)
+                                        .setMessage("Try again!")
+                                        .show();
+                            }
                         }
                     }
-                }
-        );
+            );
+        }
     }
 
     private void signUp() {
@@ -205,4 +208,21 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
         transaction.replace(R.id.signon_container, signUpFragment).commit();
         return signUpFragment;
     }
+
+    private boolean validate(){
+        if(Utils.isEditTextEmpty(mUsername)){
+            mUsername.setError("Required");
+            return false;
+        }
+        if(Utils.isEditTextEmpty(mPassword)){
+            mPassword.setError("Required");
+            return false;
+        }
+        if(!Utils.isEmailValid(mUsername.getText().toString())){
+            mUsername.setError("Invalid email");
+            return false;
+        }
+        return true;
+    }
+
 }

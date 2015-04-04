@@ -2,14 +2,17 @@ package in.tosc.bookd.signon;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -53,7 +56,18 @@ public class SignUpFragment extends Fragment {
         mName = (EditText) rootView.findViewById(R.id.et_name);
         EditText username = (EditText) rootView.findViewById(R.id.et_email);
         EditText password = (EditText) rootView.findViewById(et_passwd);
-        if(mBundle == null){
+        SimpleDraweeView profile = (SimpleDraweeView) rootView.findViewById(R.id.profile);
+        if(mBundle.getString(ParseTables.Users.IMAGE)!=null){
+            Log.d("sfg","dsgsdgsdg");
+            Uri profileUri = Uri.parse(mBundle.getString(ParseTables.Users.IMAGE));
+            profile.setImageURI(profileUri);
+        }
+        SimpleDraweeView cover = (SimpleDraweeView) rootView.findViewById(R.id.cover);
+        if(mBundle.getString(ParseTables.Users.COVER)!=null){
+            Uri coverUri = Uri.parse(mBundle.getString(ParseTables.Users.COVER));
+            cover.setImageURI(coverUri);
+        }
+        if(mBundle.get(ParseTables.Users.USERNAME) == null){
             username.setVisibility(View.GONE);
             password.setVisibility(View.GONE);
         }
@@ -61,7 +75,8 @@ public class SignUpFragment extends Fragment {
             username.setText(mBundle.getString(ParseTables.Users.USERNAME));
             password.setText(mBundle.getString(ParseTables.Users.PASSWORD));
         }
-
+        if(mBundle.getString(ParseTables.Users.NAME) != null)
+            mName.setText(mBundle.getString(ParseTables.Users.NAME));
         Button parsePush = (Button) rootView.findViewById(R.id.btn_parsepush);
         parsePush.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +97,8 @@ public class SignUpFragment extends Fragment {
         user.put(ParseTables.Users.NAME, mName.getText().toString());
         user.put(ParseTables.Users.MOBILE, mPhone.getText().toString());
         user.put(ParseTables.Users.FULLY_REGISTERED, true);
+        user.put(ParseTables.Users.COVER,mBundle.getString(ParseTables.Users.COVER));
+        user.put(ParseTables.Users.IMAGE,mBundle.getString(ParseTables.Users.IMAGE));
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
