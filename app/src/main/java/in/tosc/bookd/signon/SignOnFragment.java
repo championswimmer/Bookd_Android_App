@@ -55,6 +55,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
         ParseUser pUser = ParseUser.getCurrentUser();
         if ((pUser != null)
                 && (pUser.isAuthenticated())
+                && (pUser.getBoolean(ParseTables.Users.FULLY_REGISTERED))
                 && (pUser.getSessionToken() != null)) {
             Log.d(TAG, pUser.getUsername() + pUser.getSessionToken());
             Intent i = new Intent(getActivity(), MainActivity.class);
