@@ -71,9 +71,6 @@ public class AddBookLibraryActivity extends ActionBarActivity {
                 tvBookAuthor.setText(bookObject.getAuthor());
                 tvBookPublisher.setText(bookObject.getPublisher());
                 tvBookSummary.setText(bookObject.getSummary());
-                //TODO: Also need to set the book image
-                Uri bookImageUri = Uri.parse(bookObject.getImage());
-                imageBook.setImageURI(bookImageUri);
                 addLibrary.setVisibility(View.VISIBLE);
                 addLibrary.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -83,6 +80,7 @@ public class AddBookLibraryActivity extends ActionBarActivity {
                         pUser.saveEventually();
                     }
                 });
+
             } else {
                 //TODO: What if we do not get a result ?? Do something about that too
                 if (Utils.LOG_V) Log.v(TAG, "bookObject is not returned");
