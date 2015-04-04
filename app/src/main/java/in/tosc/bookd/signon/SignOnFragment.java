@@ -77,7 +77,14 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
         mTextview = (TextView) rootView.findViewById(R.id.Bookd_text);
         typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Lobster-Regular.ttf");
         mTextview.setTypeface(typeface);
-
+        mPassword.setTypeface(typeface);
+        mUsername.setTypeface(typeface);
+        fb_login.setColorNormal(R.color.button_normal);
+        fb_login.setColorPressed(R.color.button_normal_pressed);
+        fb_login.setColorRipple(R.color.colorAccent);
+        twitter_login.setColorNormal(R.color.button_normal);
+        twitter_login.setColorPressed(R.color.button_normal_pressed);
+        twitter_login.setColorRipple(R.color.colorAccent);
 
         signup.setOnClickListener(this);
         signin.setOnClickListener(this);

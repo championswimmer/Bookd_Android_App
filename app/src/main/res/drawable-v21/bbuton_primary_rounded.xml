@@ -6,14 +6,14 @@
         android:drawable="@android:color/white"></item>
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/colorPrimary" />
+            <solid android:color="@color/button_normal_pressed" />
             <corners android:radius="@dimen/bbuton_rounded_corner_radius" />
         </shape>
     </item>
 
     <item android:state_enabled="false">
         <shape>
-            <solid android:color="@color/colorAccent" />
+            <solid android:color="@color/button_norma_focused" />
             <corners android:radius="@dimen/bbuton_rounded_corner_radius" />
         </shape>
     </item>
@@ -21,7 +21,7 @@
 
     <item>
         <shape>
-            <solid android:color="@color/colorPrimaryDark" />
+            <solid android:color="@color/button_normal" />
             <corners android:radius="@dimen/bbuton_rounded_corner_radius" />
         </shape>
     </item>
