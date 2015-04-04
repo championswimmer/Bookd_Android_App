@@ -142,7 +142,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                                     }
                                 });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id,name,link");
+                        parameters.putString("fields", "picture,cover");
                         request.setParameters(parameters);
                         request.executeAsync();
                         showSignupDataFragment(null);
