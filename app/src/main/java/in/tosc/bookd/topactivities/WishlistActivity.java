@@ -39,7 +39,7 @@ public class WishlistActivity extends ActionBarActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(new NumberedAdapter(30));
 
-        FloatingActionButton wishlistFab = (FloatingActionButton) findViewById(R.id.library_fab);
+        FloatingActionButton wishlistFab = (FloatingActionButton) findViewById(R.id.wishlist_fab);
         wishlistFab.attachToRecyclerView(recyclerView);
 
     }
