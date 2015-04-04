@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -28,7 +29,7 @@
                     android:layout_weight="3"
                     android:id="@+id/image_book"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/sample_book_placeholder"
+                    fresco:placeholderImage="@drawable/sample_book_placeholder"
                     android:layout_width="170dp"
                     android:layout_height="170dp" />
 
