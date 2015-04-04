@@ -33,6 +33,7 @@
             android:layout_height="match_parent"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
+            android:weightSum="3"
             android:orientation="vertical"
             android:layout_marginTop="5dp">
 
@@ -40,7 +41,7 @@
                 android:id="@+id/book_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:ellipsize="end"
                 android:ems="3"
                 android:maxLines="1"
@@ -56,7 +57,7 @@
                 android:layout_height="0dp"
                 android:layout_below="@+id/listing_name"
                 android:layout_marginTop="3dp"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:text="Author"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
@@ -66,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_below="@+id/listing_desc"
-                android:layout_weight="1.25"
+                android:layout_weight="1"
                 android:ellipsize="end"
                 android:ems="3"
                 android:maxLines="1"
@@ -78,24 +79,23 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0sp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="8dp"
             android:layout_weight="0.15"
-            android:gravity="bottom"
-            android:layout_gravity="bottom"
-            android:orientation="vertical">
+            android:gravity="top"
+            android:layout_gravity="top">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/delete"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.475"
-                android:layout_gravity="bottom"
-                android:src="@drawable/ic_delete_grey" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:src="@drawable/ic_delete_grey"
+                android:background="@android:color/transparent"/>
 
         </LinearLayout>
 
