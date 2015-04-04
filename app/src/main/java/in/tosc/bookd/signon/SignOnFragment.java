@@ -26,6 +26,7 @@ import com.parse.ParseUser;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.List;
 
 import in.tosc.bookd.MainActivity;
 import in.tosc.bookd.ParseTables;
@@ -110,10 +111,15 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
     }
 
     private void signInFB() {
-        ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(), Arrays.asList("email"), new LogInCallback() {
+        List<String> permissions = Arrays.asList(
+                "public_profile",
+                "user_friends",
+                "email");
+        ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(), permissions, new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
-                if(e != null){
+                Log.d(TAG, "logInWithReadPermissionsInBackground done");
+                if (e == null) {
                     if (parseUser.isNew()) {
                         GraphRequest request = GraphRequest.newMeRequest(
                                 AccessToken.getCurrentAccessToken(),
@@ -135,8 +141,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                         startActivity(i);
                         getActivity().finish();
                     }
-                }
-                else{
+                } else {
                     e.printStackTrace();
                 }
 
