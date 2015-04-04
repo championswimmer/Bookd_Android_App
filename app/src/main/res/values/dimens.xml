@@ -20,18 +20,21 @@
     <dimen name="material_drawer_vertical_padding">16dp</dimen>
     <!-- General icon margin above and under the icons -->
     <dimen name="material_drawer_icon_margin">12dp</dimen>
-    <!-- Definition for the primary item -->
+    <!-- Definition for the primary book_item -->
     <dimen name="material_drawer_primary">48dp</dimen>
     <dimen name="material_drawer_primary_icon">22dp</dimen>
     <dimen name="material_drawer_primary_text">14sp</dimen>
-    <!-- Definition for the secondary item -->
+    <!-- Definition for the secondary book_item -->
     <dimen name="material_drawer_secondary">44dp</dimen>
     <dimen name="material_drawer_secondary_icon">22dp</dimen>
     <dimen name="material_drawer_secondary_text">14sp</dimen>
-    <!-- Definition for the section item -->
+    <!-- Definition for the section book_item -->
     <dimen name="material_drawer_section_text">14sp</dimen>
 
 
     <!-- Toolbar Padding -->
     <dimen name="tool_bar_top_padding">0dp</dimen>
+    <dimen name="margin_book_item">20dp</dimen>
+    <dimen name="padding_book_recyclerview">20dp</dimen>
+    <dimen name="column_width_book_recyclerview">150dp</dimen>
 </resources>

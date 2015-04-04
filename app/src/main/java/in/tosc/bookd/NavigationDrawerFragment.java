@@ -33,7 +33,7 @@ import in.tosc.bookd.topactivities.ProfileActivity;
 public class NavigationDrawerFragment extends Fragment {
 
     /**
-     * Remember the position of the selected item.
+     * Remember the position of the selected book_item.
      */
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
 
@@ -80,7 +80,7 @@ public class NavigationDrawerFragment extends Fragment {
             mFromSavedInstanceState = true;
         }
 
-        // Select either the default item (0) or the last selected item.
+        // Select either the default book_item (0) or the last selected book_item.
         //selectItem(mCurrentSelectedPosition);
     }
 
@@ -286,7 +286,7 @@ public class NavigationDrawerFragment extends Fragment {
      */
     public static interface NavigationDrawerCallbacks {
         /**
-         * Called when an item in the navigation drawer is selected.
+         * Called when an book_item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
     }
