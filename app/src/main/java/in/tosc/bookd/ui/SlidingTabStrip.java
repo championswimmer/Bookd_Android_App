@@ -1,5 +1,3 @@
-package in.tosc.bookd.ui;
-
 /*
  * Copyright 2014 Google Inc. All rights reserved.
  *
@@ -16,19 +14,18 @@ package in.tosc.bookd.ui;
  * limitations under the License.
  */
 
+package in.tosc.bookd.ui;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.View;
+import android.widget.LinearLayout;
 
-        import android.R;
-        import android.content.Context;
-        import android.graphics.Canvas;
-        import android.graphics.Color;
-        import android.graphics.Paint;
-        import android.util.AttributeSet;
-        import android.util.TypedValue;
-        import android.view.View;
-        import android.widget.LinearLayout;
-
-    class SlidingTabStrip extends LinearLayout {
+class SlidingTabStrip extends LinearLayout {
 
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 0;
     private static final byte DEFAULT_BOTTOM_BORDER_COLOR_ALPHA = 0x26;
@@ -60,7 +57,7 @@ package in.tosc.bookd.ui;
         final float density = getResources().getDisplayMetrics().density;
 
         TypedValue outValue = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorForeground, outValue, true);
+        context.getTheme().resolveAttribute(android.R.attr.colorForeground, outValue, true);
         final int themeForegroundColor =  outValue.data;
 
         mDefaultBottomBorderColor = setColorAlpha(themeForegroundColor,

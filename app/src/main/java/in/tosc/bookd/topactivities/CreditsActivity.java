@@ -16,9 +16,11 @@ import in.tosc.bookd.ui.SlidingTabLayout;
 public class CreditsActivity extends ActionBarActivity implements ViewPager.OnPageChangeListener {
 
     private static final String TAG = CreditsActivity.class.getSimpleName();
-    private SlidingTabLayout mPagerSlidingTabStrip;
+    private SlidingTabLayout mPagerSlidingTabLayout;
     private ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
+    Toolbar toolbar;
+    private String myTitle;
 
 
     @Override
@@ -26,20 +28,33 @@ public class CreditsActivity extends ActionBarActivity implements ViewPager.OnPa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credits);
 
-        Toolbar toolbar =(Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        myTitle = getString(R.string.app_name);
+        if (toolbar == null) {
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            if (toolbar != null) {
+                setSupportActionBar(toolbar);
+                toolbar.setTitle(myTitle);
+                toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+                getSupportActionBar().setDisplayShowTitleEnabled(true);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mPagerSlidingTabStrip = (SlidingTabLayout) findViewById(R.id.tabs);
+        mPagerSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.tabs);
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setOffscreenPageLimit(1);
+        //mViewPager.setOffscreenPageLimit(1);
 
-        mPagerSlidingTabStrip.setOnPageChangeListener(this);
+        mPagerSlidingTabLayout.setOnPageChangeListener(this);
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
-
+        mPagerSlidingTabLayout.setDistributeEvenly(true);
         mViewPager.setAdapter(mPagerAdapter);
-        mPagerSlidingTabStrip.setViewPager(mViewPager);
+        mPagerSlidingTabLayout.setViewPager(mViewPager);
+        mPagerSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.colorAccent);
+            }
+        });
 
 
     }
