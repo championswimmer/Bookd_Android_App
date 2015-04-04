@@ -63,7 +63,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ScannerActivity"
+            android:name=".utilactivities.ScannerActivity"
             android:label="Scanner" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -83,6 +83,22 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.tosc.bookd.MainActivity" />
+        </activity>
+        <activity
+            android:name=".utilactivities.AddBookLibraryActivity"
+            android:label="@string/title_activity_add_book_library"
+            android:parentActivityName=".topactivities.LibraryActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.tosc.bookd.topactivities.LibraryActivity" />
+        </activity>
+        <activity
+            android:name=".utilactivities.AddBookWishlistActivity"
+            android:label="@string/title_activity_add_book_wishlist"
+            android:parentActivityName=".topactivities.WishlistActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.tosc.bookd.topactivities.WishlistActivity" />
         </activity>
     </application>
 

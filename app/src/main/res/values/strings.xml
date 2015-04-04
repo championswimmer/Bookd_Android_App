@@ -32,5 +32,7 @@
     <string name="facebook_app_id">xxxxxxxxxxxxxxxxxxxxxxxxxx</string>
     <string name="title_find_books">Find books</string>
     <string name="title_activity_wishlist">WishlistActivity</string>
+    <string name="title_activity_add_book_library">AddBookLibraryActivity</string>
+    <string name="title_activity_add_book_wishlist">AddBookWishlistActivity</string>
 
 </resources>

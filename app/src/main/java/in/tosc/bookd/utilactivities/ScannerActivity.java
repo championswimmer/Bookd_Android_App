@@ -1,4 +1,4 @@
-package in.tosc.bookd;
+package in.tosc.bookd.utilactivities;
 
 import android.app.Activity;
 import android.os.Bundle;
