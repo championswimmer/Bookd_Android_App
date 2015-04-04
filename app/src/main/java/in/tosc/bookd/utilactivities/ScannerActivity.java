@@ -1,6 +1,7 @@
 package in.tosc.bookd.utilactivities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -43,5 +44,9 @@ public class ScannerActivity extends Activity implements ZBarScannerView.ResultH
     public void handleResult(Result rawResult) {
         // Do something with the result here
         Log.v("Result : ", rawResult.getContents()); // Prints scan results
+        Intent result = new Intent();
+        result.putExtra("ISBN", rawResult.getContents());
+        setResult(AddBookLibraryActivity.ADD_BOOK_LIBRARY_RESULT, result);
+        finish();
     }
 }

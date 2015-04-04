@@ -26,6 +26,7 @@
 
                 <ImageView
                     android:layout_weight="3"
+                    android:id="@+id/image_book"
                     android:layout_centerInParent="true"
                     android:background="@mipmap/ic_sample_book"
                     android:layout_width="170dp"
