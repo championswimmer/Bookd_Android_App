@@ -128,8 +128,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
 
     private void signInFB() {
         List<String> permissions = Arrays.asList(
-                "public_profile",
-                "email");
+                "public_profile");
         ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(), permissions, new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
@@ -153,9 +152,8 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                                         try {
                                             if(!object.isNull("cover"))
                                                 b.putString(ParseTables.Users.COVER,object.getJSONObject("cover").getString("source"));
-                                            if(!object.isNull("email"))
-                                                Log.d("dsf", object.getString("email"));
-                                            b.putString(ParseTables.Users.IMAGE,object.getJSONObject("picture").getJSONObject("data").getString("url"));
+                                            String id = object.getString("id");
+                                            b.putString(ParseTables.Users.IMAGE,"https://graph.facebook.com/" + id + "/picture??width=300&&height=300");
                                             b.putString(ParseTables.Users.NAME, object.getString("name"));
                                             showSignupDataFragment(b);
                                         } catch (JSONException e1) {
@@ -164,7 +162,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                                     }
                                 });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "name,email,picture,cover");
+                        parameters.putString("fields", "name,email,id,cover");
                         request.setParameters(parameters);
                         request.executeAsync();
                     } else {
