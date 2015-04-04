@@ -2,18 +2,21 @@ package in.tosc.bookd.utilactivities;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.parse.ParseUser;
 
 import java.util.concurrent.ExecutionException;
 
+import in.tosc.bookd.ParseTables;
 import in.tosc.bookd.R;
 import in.tosc.bookd.Utils;
 import in.tosc.bookd.bookapi.BookObject;
@@ -29,6 +32,7 @@ public class AddBookLibraryActivity extends ActionBarActivity {
 
     SimpleDraweeView imageBook;
     TextView tvBookTitle, tvBookAuthor, tvBookPublisher, tvBookSummary;
+    Button addLibrary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,7 @@ public class AddBookLibraryActivity extends ActionBarActivity {
         tvBookAuthor = (TextView) findViewById(R.id.tv_book_author);
         tvBookPublisher = (TextView) findViewById(R.id.tv_book_publisher);
         tvBookSummary = (TextView) findViewById(R.id.tv_book_summary);
+        addLibrary = (Button) findViewById(R.id.btn_addlibrary);
 
         Intent scan = new Intent(this, ScannerActivity.class);
         startActivityForResult(scan, ADD_BOOK_LIBRARY_RESULT);
@@ -69,6 +74,15 @@ public class AddBookLibraryActivity extends ActionBarActivity {
                 //TODO: Also need to set the book image
                 Uri bookImageUri = Uri.parse(bookObject.getImage());
                 imageBook.setImageURI(bookImageUri);
+                addLibrary.setVisibility(View.VISIBLE);
+                addLibrary.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ParseUser pUser = ParseUser.getCurrentUser();
+                        pUser.add(ParseTables.Users.BOOKS,bookObject.getIsbn());
+                        pUser.saveEventually();
+                    }
+                });
             } else {
                 //TODO: What if we do not get a result ?? Do something about that too
                 if (Utils.LOG_V) Log.v(TAG, "bookObject is not returned");

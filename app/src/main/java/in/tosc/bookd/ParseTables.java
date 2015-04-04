@@ -14,5 +14,6 @@ public class ParseTables {
         public static final String MOBILE = "mobile";
         public static final String COVER = "cover";
         public static final String FULLY_REGISTERED = "fullyRegistered";
+        public static final String BOOKS = "books";
     }
 }
