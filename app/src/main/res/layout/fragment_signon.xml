@@ -1,63 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:fab="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/Bookd_text"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:text="Bookd"
+        android:textSize="35sp"
+        android:textColor="@android:color/white"/>
 
-
-    <in.tosc.bookd.ui.MaterialEditText
-        android:imeOptions="actionNext"
-        android:singleLine="true"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/et_username"
-        android:hint="Username"
-        android:layout_gravity="center_horizontal"
-        app:baseColor="@color/white"
-        app:primaryColor="@color/white"
-        android:padding="10dp"/>
+        android:background="@color/EditTextBackground"
+        android:orientation="vertical">
 
-    <in.tosc.bookd.ui.MaterialEditText
-        android:imeOptions="actionNext"
-        android:singleLine="true"
+        <in.tosc.bookd.ui.MaterialEditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:hint="Username"
+            android:imeOptions="actionNext"
+            android:padding="5dp"
+            android:singleLine="true"
+            app:baseColor="@color/white"
+            app:primaryColor="@color/white" />
+
+        <in.tosc.bookd.ui.MaterialEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:hint="Password"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:padding="5dp"
+            android:singleLine="true"
+            app:baseColor="@color/white"
+            app:primaryColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/et_password"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_gravity="center_horizontal"
-        app:baseColor="@color/white"
-        app:primaryColor="@color/white"
-        android:padding="10dp"/>
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="30dp">
 
-    <Button
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bbuton_primary_rounded"
+            android:text="Signup"
+            android:layout_marginRight="50dp"/>
+
+        <Button
+            android:id="@+id/btn_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bbuton_primary_rounded"
+            android:text="Signin" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Signup"
-        android:id="@+id/btn_signup"
-        android:layout_gravity="center_horizontal" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="30dp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Signin"
-        android:id="@+id/btn_signin"
-        android:layout_gravity="center_horizontal" />
+        <com.melnykov.fab.FloatingActionButton
+            android:id="@+id/btn_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/ic_action_facebook"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_colorRipple="@color/colorAccent"
+            android:layout_marginRight="70dp"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Facebook"
-        android:id="@+id/btn_facebook"
-        android:layout_gravity="center_horizontal" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Twitter"
-        android:id="@+id/btn_twitter"
-        android:layout_gravity="center_horizontal" />
-
+        <com.melnykov.fab.FloatingActionButton
+            android:id="@+id/btn_twitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:src="@drawable/ic_action_twitter"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimaryDark"
+            fab:fab_colorRipple="@color/colorAccent" />
+    </LinearLayout>
 </LinearLayout>

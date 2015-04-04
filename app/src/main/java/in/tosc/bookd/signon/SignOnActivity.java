@@ -28,16 +28,6 @@ public class SignOnActivity extends ActionBarActivity {
         SignOnFragment fragment = new SignOnFragment();
         transaction.replace(R.id.signon_container, fragment,"SignOnFragment").commit();
 
-        myTitle = getString(R.string.title_activity_sign_on);
-        if (toolbar == null) {
-            toolbar = (Toolbar) findViewById(R.id.toolbar);
-            if (toolbar != null) {
-                setSupportActionBar(toolbar);
-                toolbar.setTitle(myTitle);
-                toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-            }
-        }
-
     }
 
 
