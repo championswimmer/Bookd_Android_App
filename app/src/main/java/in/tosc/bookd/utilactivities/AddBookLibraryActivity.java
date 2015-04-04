@@ -67,8 +67,10 @@ public class AddBookLibraryActivity extends ActionBarActivity {
                 tvBookPublisher.setText(bookObject.getPublisher());
                 tvBookSummary.setText(bookObject.getSummary());
                 //TODO: Also need to set the book image
-                Uri bookImageUri = Uri.parse(bookObject.getImage());
-                imageBook.setImageURI(bookImageUri);
+                if (bookObject.getImage().startsWith("http")) {
+                    Uri bookImageUri = Uri.parse(bookObject.getImage());
+                    imageBook.setImageURI(bookImageUri);
+                }
             } else {
                 //TODO: What if we do not get a result ?? Do something about that too
                 if (Utils.LOG_V) Log.v(TAG, "bookObject is not returned");
