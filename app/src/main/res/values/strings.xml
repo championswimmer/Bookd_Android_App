@@ -29,5 +29,6 @@
     <string name="title_activity_sign_on">SignOnActivity</string>
 
     <string name="facebook_app_id">xxxxxxxxxxxxxxxxxxxxxxxxxx</string>
+    <string name="title_find_books">Find books</string>
 
 </resources>

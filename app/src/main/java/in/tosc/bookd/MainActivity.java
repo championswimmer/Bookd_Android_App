@@ -65,26 +65,23 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         //FragmentManager fragmentManager = getSupportFragmentManager();
         switch (position) {
-//            case 0:
-//            default:
-//                mTitle = "Home";
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, Home.newInstance("Home", "H"))
-//                        .commit();
-//                break;
+            default:
+                break;
+            case 0:
+                startActivity(new Intent(MainActivity.this, LibraryActivity.class));
+                overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
+                break;
+
             case 1:
                 startActivity(new Intent(MainActivity.this, OrdersActivity.class));
                 overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
                 break;
+
             case 2:
                 startActivity(new Intent(MainActivity.this, CreditsActivity.class));
                 overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
                 break;
 
-            case 3:
-                startActivity(new Intent(MainActivity.this, LibraryActivity.class));
-                overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
-                break;
             case 4:
                 startActivity(new Intent(MainActivity.this, LibraryActivity.class));
                 overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
@@ -99,14 +96,17 @@ public class MainActivity extends ActionBarActivity
 
     public void onSectionAttached(int number) {
         switch (number) {
-            case 1:
+            case 0:
                 mTitle = getString(R.string.navdrawer_item_library);
                 break;
-            case 2:
+            case 1:
                 mTitle = getString(R.string.navdrawer_item_orders);
                 break;
-            case 3:
+            case 2:
                 mTitle = getString(R.string.navdrawer_item_credits);
+                break;
+            default:
+                mTitle = getString(R.string.title_find_books);
                 break;
         }
     }
@@ -145,46 +145,6 @@ public class MainActivity extends ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
     }
 
 }

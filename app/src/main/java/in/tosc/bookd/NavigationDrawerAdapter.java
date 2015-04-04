@@ -63,6 +63,7 @@ public class NavigationDrawerAdapter extends BaseAdapter {
         navigationIcon.setBackgroundResource(R.mipmap.ic_launcher);
 
         String s = mString[pos];
+        //TODO: Attach specific icons for different sections
         navigationIcon.setBackgroundResource(R.drawable.home);
         return rowView;
     }
