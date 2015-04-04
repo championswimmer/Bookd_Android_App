@@ -41,5 +41,6 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
     compile 'com.flaviofaria:kenburnsview:1.0.6'
     compile 'com.melnykov:floatingactionbutton:1.2.0'
+    compile 'com.facebook.fresco:fresco:0.1.0+'
 
 }

@@ -141,11 +141,12 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                                         Log.d(TAG,"" +object);
                                         try {
                                             if(!object.isNull("cover"))
-                                                Log.d("dsf", object.getJSONObject("cover").getString("source"));
+                                                b.putString(ParseTables.Users.COVER,object.getJSONObject("cover").getString("source"));
                                             if(!object.isNull("email"))
                                                 Log.d("dsf", object.getString("email"));
-                                            Log.d("dsf", object.getJSONObject("picture").getJSONObject("data").getString("url"));
+                                            b.putString(ParseTables.Users.IMAGE,object.getJSONObject("picture").getJSONObject("data").getString("url"));
                                             b.putString(ParseTables.Users.NAME, object.getString("name"));
+                                            showSignupDataFragment(b);
                                         } catch (JSONException e1) {
                                             e1.printStackTrace();
                                         }
@@ -155,7 +156,6 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                         parameters.putString("fields", "name,email,picture,cover");
                         request.setParameters(parameters);
                         request.executeAsync();
-                        showSignupDataFragment(b);
                     } else {
                         Intent i = new Intent(getActivity(), MainActivity.class);
                         startActivity(i);
