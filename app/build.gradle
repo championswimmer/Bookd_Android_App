@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file("keystore/debug.jks")
+            keyAlias 'teamosc'
+            keyPassword 'teamosc'
+            storePassword 'teamosc'
+        }
+    }
     compileSdkVersion 22
     buildToolsVersion "21.1.2"
 
@@ -16,7 +24,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            signingConfig signingConfigs.debug
+        }
     }
+
 }
 
 dependencies {
@@ -25,6 +37,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:22.0.0'
     compile 'com.android.support:cardview-v7:22.0.0'
     compile 'me.dm7.barcodescanner:zbar:1.6.3'
+    compile 'com.parse.bolts:bolts-android:1.1.4'
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
     compile 'com.pkmmte.view:circularimageview:1.1'
 }
