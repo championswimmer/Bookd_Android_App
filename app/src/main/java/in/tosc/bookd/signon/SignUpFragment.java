@@ -104,14 +104,22 @@ public class SignUpFragment extends Fragment {
         ParseUser user = ParseUser.getCurrentUser();
         if(user == null)
             user = new ParseUser();
-        user.setEmail(mBundle.getString(ParseTables.Users.USERNAME));
+        if (mBundle.getString(ParseTables.Users.USERNAME) != null) {
+            user.setEmail(mBundle.getString(ParseTables.Users.USERNAME));
+        }
         user.setUsername(mBundle.getString(ParseTables.Users.USERNAME));
-        user.setPassword(mBundle.getString(ParseTables.Users.PASSWORD));
+        if (mBundle.getString(ParseTables.Users.PASSWORD) != null) {
+            user.setPassword(mBundle.getString(ParseTables.Users.PASSWORD));
+        }
         user.put(ParseTables.Users.NAME, mName.getText().toString());
         user.put(ParseTables.Users.MOBILE, mPhone.getText().toString());
         user.put(ParseTables.Users.FULLY_REGISTERED, true);
-        user.put(ParseTables.Users.COVER,mBundle.getString(ParseTables.Users.COVER));
-        user.put(ParseTables.Users.IMAGE,mBundle.getString(ParseTables.Users.IMAGE));
+        if (mBundle.getString(ParseTables.Users.COVER) != null) {
+            user.put(ParseTables.Users.COVER, mBundle.getString(ParseTables.Users.COVER));
+        }
+        if (mBundle.getString(ParseTables.Users.IMAGE) != null) {
+            user.put(ParseTables.Users.IMAGE, mBundle.getString(ParseTables.Users.IMAGE));
+        }
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {

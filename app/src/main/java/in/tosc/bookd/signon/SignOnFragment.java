@@ -244,6 +244,8 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                         twitterBundle.putString(ParseTables.Users.COVER,object.getString("profile_background_image_url"));
                     if(object.getString("name") != null)
                         twitterBundle.putString(ParseTables.Users.NAME, object.getString("name"));
+                    if(object.getString("screen_name") != null)
+                        twitterBundle.putString(ParseTables.Users.USERNAME, object.getString("screen_name"));
                     return twitterBundle;
                 } catch (Exception e){
 
