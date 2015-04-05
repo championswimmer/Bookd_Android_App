@@ -133,8 +133,11 @@ public class NavigationDrawerFragment extends Fragment {
         name=(TextView) v.findViewById(R.id.name);
         email=(TextView) v.findViewById(R.id.email);
 
+        if (!Utils.readFileAsString("cover").equals(""))
         cover.setImageURI(Uri.parse(Utils.readFileAsString("cover")));
+        if (!Utils.readFileAsString("profile").equals(""))
         profile.setImageURI(Uri.parse(Utils.readFileAsString("profile")));
+        if (!Utils.readFileAsString("name").equals(""))
         name.setText(Utils.readFileAsString("name"));
         return v;
     }
