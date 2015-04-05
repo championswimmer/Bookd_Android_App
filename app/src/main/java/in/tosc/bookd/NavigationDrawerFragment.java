@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -21,7 +22,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import in.tosc.bookd.topactivities.ProfileActivity;
 
@@ -62,6 +66,9 @@ public class NavigationDrawerFragment extends Fragment {
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+
+    SimpleDraweeView cover,profile;
+    TextView name,email;
 
     public NavigationDrawerFragment() {
     }
@@ -119,6 +126,16 @@ public class NavigationDrawerFragment extends Fragment {
                 GoToProfile(relativeLayout);
             }
         });
+
+        cover=(SimpleDraweeView) v.findViewById(R.id.header);
+        profile=(SimpleDraweeView) v.findViewById(R.id.profile);
+
+        name=(TextView) v.findViewById(R.id.name);
+        email=(TextView) v.findViewById(R.id.email);
+
+        cover.setImageURI(Uri.parse(Utils.readFileAsString("cover")));
+        profile.setImageURI(Uri.parse(Utils.readFileAsString("profile")));
+        name.setText(Utils.loadUri("name"));
         return v;
     }
 
