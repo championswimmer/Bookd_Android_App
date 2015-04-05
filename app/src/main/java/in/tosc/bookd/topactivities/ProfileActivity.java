@@ -1,20 +1,24 @@
 package in.tosc.bookd.topactivities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import in.tosc.bookd.R;
+import in.tosc.bookd.Utils;
 
 public class ProfileActivity extends ActionBarActivity {
 
     Toolbar toolbar;
     private String myTitle;
     SimpleDraweeView cover,profile;
+    TextView name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,10 @@ public class ProfileActivity extends ActionBarActivity {
         }
         cover=(SimpleDraweeView) findViewById(R.id.cover);
         profile=(SimpleDraweeView) findViewById(R.id.profile);
+        name=(TextView) findViewById(R.id.name);
+        name.setText(Utils.loadUri("name"));
+        cover.setImageURI(Uri.parse(Utils.readFileAsString("cover")));
+        profile.setImageURI(Uri.parse(Utils.readFileAsString("profile")));
 
     }
 
