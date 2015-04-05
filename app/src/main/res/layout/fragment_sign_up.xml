@@ -17,7 +17,7 @@
             android:layout_height="250dp"
             android:layout_gravity="center"
             android:scaleType="fitXY"
-            fresco:placeholderImage="@drawable/mystery" />
+            fresco:placeholderImage="@drawable/bg_default_profile_art" />
 
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -25,7 +25,7 @@
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_gravity="center|bottom"
-            fresco:placeholderImage="@mipmap/ic_launcher"
+            fresco:placeholderImage="@drawable/com_facebook_profile_picture_blank_square"
             fresco:roundAsCircle="true"/>
     </FrameLayout>
 
