@@ -72,7 +72,7 @@ public class AddBookLibraryActivity extends ActionBarActivity {
                 tvBookAuthor.setText(bookObject.getAuthor());
                 tvBookPublisher.setText(bookObject.getPublisher());
                 tvBookSummary.setText(bookObject.getSummary());
-                if (bookObject.getImage().startsWith("http")) {
+                if ((bookObject.getImage() != null) && bookObject.getImage().startsWith("http")) {
                     Uri bookImageUri = Uri.parse(bookObject.getImage());
                     imageBook.setImageURI(bookImageUri);
                 }
