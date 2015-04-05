@@ -1,16 +1,35 @@
 package in.tosc.bookd.topactivities;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.melnykov.fab.FloatingActionButton;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import in.tosc.bookd.ParseTables;
 import in.tosc.bookd.R;
 import in.tosc.bookd.ui.NumberedAdapter;
 import in.tosc.bookd.utilactivities.AddBookLibraryActivity;
@@ -45,6 +64,7 @@ public class LibraryActivity extends ActionBarActivity {
         FloatingActionButton libraryFab = (FloatingActionButton) findViewById(R.id.library_fab);
         libraryFab.attachToRecyclerView(recyclerView);
 
+        fetchLibrary();
         libraryFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,5 +118,73 @@ public class LibraryActivity extends ActionBarActivity {
     protected void onStop() {
         super.onStop();
         overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
+    }
+
+    private void fetchLibrary(){
+        ParseUser parseUser = ParseUser.getCurrentUser();
+        Log.d("Response ", String.valueOf(parseUser.getJSONArray(ParseTables.Users.LIBRARY)));
+        JSONArray jArray = parseUser.getJSONArray(ParseTables.Users.LIBRARY);
+        ArrayList<String> isbnList = new ArrayList<String>();
+        if (jArray != null) {
+            for (int i=0;i<jArray.length();i++){
+                try {
+                    isbnList.add(jArray.get(i).toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        ParseQuery<ParseObject> query = new ParseQuery<>("Book");
+        query.whereContainedIn("isbn", isbnList);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+
+            }
+        });
+
+
+    }
+
+    public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHolder> {
+        private List<ParseObject> mDataset;
+
+        public LibraryAdapter(List<ParseObject> dataSet) {
+            mDataset = dataSet;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.book_item, viewGroup, false);
+            return new ViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return mDataset.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            TextView bookName;
+            TextView author;
+            TextView publisher;
+            ImageButton overflowMenu;
+            SimpleDraweeView bookCover;
+
+            public ViewHolder(CardView v) {
+                super(v);
+                bookName = (TextView) v.findViewById(R.id.book_name);
+                author = (TextView) v.findViewById(R.id.author_name);
+                publisher = (TextView) v.findViewById(R.id.publisher_name);
+                overflowMenu = (ImageButton) v.findViewById(R.id.overflow_menu);
+                bookCover = (SimpleDraweeView) v.findViewById(R.id.book_cover);
+            }
+        }
     }
 }

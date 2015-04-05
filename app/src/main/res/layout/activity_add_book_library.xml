@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -8,7 +9,8 @@
     android:orientation="vertical"
     tools:context="in.tosc.bookd.utilactivities.AddBookLibraryActivity">
     
-    <ScrollView
+    <com.melnykov.fab.ObservableScrollView
+        android:id="@+id/add_book_container"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
         <LinearLayout
@@ -30,9 +32,9 @@
                     android:id="@+id/image_book"
                     android:layout_centerInParent="true"
                     fresco:placeholderImage="@drawable/sample_book_placeholder"
-                    fresco:actualImageScaleType="centerInside"
-                    android:layout_width="170dp"
-                    android:layout_height="170dp" />
+                    fresco:actualImageScaleType="fitXY"
+                    android:layout_width="150dp"
+                    android:layout_height="200dp" />
 
 
             </RelativeLayout>
@@ -82,14 +84,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-    </ScrollView>
+    </com.melnykov.fab.ObservableScrollView>
 
-    <Button
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/btn_addlibrary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/btn_addlibrary"
-        android:visibility="gone"
-        android:layout_gravity="right|bottom" />
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_done_add_book"
+        fab:fab_colorNormal="@color/colorPrimary"
+        fab:fab_colorPressed="@color/colorPrimaryDark"
+        fab:fab_colorRipple="@color/colorAccent" />
 
 </FrameLayout>

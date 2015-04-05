@@ -29,10 +29,10 @@
                     android:layout_weight="3"
                     android:id="@+id/image_book"
                     android:layout_centerInParent="true"
-                    fresco:actualImageScaleType="centerInside"
+                    fresco:actualImageScaleType="fitXY"
                     fresco:placeholderImage="@drawable/sample_book_placeholder"
-                    android:layout_width="170dp"
-                    android:layout_height="170dp" />
+                    android:layout_width="150dp"
+                    android:layout_height="200dp" />
 
 
             </RelativeLayout>
