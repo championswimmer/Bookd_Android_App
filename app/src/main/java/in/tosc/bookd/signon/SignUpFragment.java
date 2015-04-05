@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +66,6 @@ public class SignUpFragment extends Fragment {
         password.setTypeface(typeface);
         SimpleDraweeView profile = (SimpleDraweeView) rootView.findViewById(R.id.profile);
         if(mBundle.getString(ParseTables.Users.IMAGE)!=null){
-            Log.d("sfg","dsgsdgsdg");
             Uri profileUri = Uri.parse(mBundle.getString(ParseTables.Users.IMAGE));
             profile.setImageURI(profileUri);
         }
