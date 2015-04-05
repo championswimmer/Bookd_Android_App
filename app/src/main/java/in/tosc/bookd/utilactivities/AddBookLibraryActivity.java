@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -99,7 +97,7 @@ public class AddBookLibraryActivity extends ActionBarActivity {
                                     "You already have this book in your library",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            pUser.add(ParseTables.Users.LIBRARY, bookObject.getIsbn());
+                            pUser.addUnique(ParseTables.Users.LIBRARY, bookObject.getIsbn());
                             pUser.saveEventually();
                         }
                     }
