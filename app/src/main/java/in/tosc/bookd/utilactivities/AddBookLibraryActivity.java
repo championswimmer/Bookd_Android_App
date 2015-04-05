@@ -90,7 +90,8 @@ public class AddBookLibraryActivity extends ActionBarActivity {
                     @Override
                     public void onClick(View view) {
                         ParseUser pUser = ParseUser.getCurrentUser();
-                        if (pUser.getJSONArray(ParseTables.Users.LIBRARY).toString()
+                        if ((pUser.getJSONArray(ParseTables.Users.LIBRARY) != null)
+                                && pUser.getJSONArray(ParseTables.Users.LIBRARY).toString()
                                 .contains(bookObject.getIsbn())) {
 
                             Toast.makeText(getApplicationContext(),
