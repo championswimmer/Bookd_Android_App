@@ -64,7 +64,18 @@ public class NavigationDrawerAdapter extends BaseAdapter {
 
         String s = mString[pos];
         //TODO: Attach specific icons for different sections
-        navigationIcon.setBackgroundResource(R.drawable.home);
+        if (s.equals("Library")) {
+            navigationIcon.setBackgroundResource(R.drawable.library);
+
+        } else if (s.equals("Wishlist")) {
+            navigationIcon.setBackgroundResource(R.drawable.wishlist);
+
+        } else if (s.equals("Orders")) {
+            navigationIcon.setBackgroundResource(R.drawable.orders);
+
+        } else if (s.equals("Credits")) {
+            navigationIcon.setBackgroundResource(R.drawable.credits);
+        }
         return rowView;
     }
 }

@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                fresco:placeholderImage="@drawable/mystery" />
+                fresco:placeholderImage="@drawable/bg_default_profile_art" />
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/profile"

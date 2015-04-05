@@ -7,4 +7,6 @@
 
     <include android:id="@+id/drawer_layout" layout="@layout/activity_main"/>
 
+
+
 </LinearLayout>
