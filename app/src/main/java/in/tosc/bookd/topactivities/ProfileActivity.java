@@ -6,12 +6,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import in.tosc.bookd.R;
 
 public class ProfileActivity extends ActionBarActivity {
 
     Toolbar toolbar;
     private String myTitle;
+    SimpleDraweeView cover,profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,8 @@ public class ProfileActivity extends ActionBarActivity {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
         }
+        cover=(SimpleDraweeView) findViewById(R.id.cover);
+        profile=(SimpleDraweeView) findViewById(R.id.profile);
 
     }
 
