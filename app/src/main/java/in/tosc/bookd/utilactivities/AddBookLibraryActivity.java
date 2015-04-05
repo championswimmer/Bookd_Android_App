@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.melnykov.fab.FloatingActionButton;
@@ -69,6 +70,8 @@ public class AddBookLibraryActivity extends ActionBarActivity {
                 bookObject = gbi.execute(data.getStringExtra("ISBN")).get();
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Could not fetch book information", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             if (bookObject != null) {
@@ -89,14 +92,24 @@ public class AddBookLibraryActivity extends ActionBarActivity {
                     @Override
                     public void onClick(View view) {
                         ParseUser pUser = ParseUser.getCurrentUser();
-                        pUser.add(ParseTables.Users.LIBRARY, bookObject.getIsbn());
-                        pUser.saveEventually();
+                        if (pUser.getJSONArray(ParseTables.Users.LIBRARY).toString()
+                                .contains(bookObject.getIsbn())) {
+
+                            Toast.makeText(getApplicationContext(),
+                                    "You already have this book in your library",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            pUser.add(ParseTables.Users.LIBRARY, bookObject.getIsbn());
+                            pUser.saveEventually();
+                        }
                     }
                 });
 
             } else {
                 //TODO: What if we do not get a result ?? Do something about that too
                 if (Utils.LOG_V) Log.v(TAG, "bookObject is not returned");
+                Toast.makeText(getApplicationContext(), "Could not fetch book information", Toast.LENGTH_SHORT).show();
+                finish();
 
             }
 
