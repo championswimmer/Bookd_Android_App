@@ -149,38 +149,6 @@ public class Utils {
         return cacheDirectory;
     }
 
-  public static String loadUri(String id) {
-
-      String uri="";
-        if (id == null)
-            return null;
-        final File file = new File(getCacheDirectory(), id);
-
-        try {
-            if (file.exists()) {
-                String currentLine;
-                BufferedReader br = new BufferedReader(new FileReader(file));
-                StringBuilder stringBuilder = new StringBuilder();
-                Log.d("lol","lol0");
-
-                while ( (currentLine= br.readLine()) != null ) {
-                    stringBuilder.append(currentLine);
-
-                }
-                Log.d("lol","lol1");
-                uri=stringBuilder.toString();
-                Log.d("lollol",uri);
-                br.close();
-            } else {
-                // final File newFile = new File(IOUtilities.ensureCache(), id);
-                // if (newFile.exists())
-                // return decodeFile(newFile);
-            }
-        } catch (Exception e) {
-            return null;
-        }
-        return uri;
-    }
 
     public static String readFileAsString(String id) {
 

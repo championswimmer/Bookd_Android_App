@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import in.tosc.bookd.R;
 import in.tosc.bookd.Utils;
 import me.dm7.barcodescanner.zbar.BarcodeFormat;
 import me.dm7.barcodescanner.zbar.Result;
@@ -24,9 +25,10 @@ public class ScannerActivity extends Activity implements ZBarScannerView.ResultH
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
-        mScannerView = new ZBarScannerView(this);    // Programmatically initialize the scanner view
+
+        setContentView(R.layout.scannerview);
+        mScannerView = (ZBarScannerView) findViewById(R.id.scannerView);
         mScannerView.setAutoFocus(true);
-        setContentView(mScannerView);                // Set the scanner view as the content view
     }
 
     @Override

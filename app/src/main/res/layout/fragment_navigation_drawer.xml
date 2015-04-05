@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_view"
     android:layout_width="300dp"
     android:layout_height="match_parent"
@@ -14,7 +15,7 @@
         android:background="#FFfafafa"
         android:onClick="GoToProfile">
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="160dp"
@@ -22,9 +23,9 @@
             android:layout_alignParentTop="true"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/cover" />
+            fresco:placeholderImage="@drawable/mystery"/>
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/profile"
             android:layout_width="56dp"
             android:layout_height="56dp"
@@ -33,7 +34,8 @@
             android:layout_marginBottom="12dp"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="8dp"
-            android:src="@mipmap/ic_launcher" />
+            fresco:roundAsCircle="true"
+            fresco:placeholderImage="@drawable/com_facebook_profile_picture_blank_portrait"/>
 
         <TextView
             android:id="@+id/name"
@@ -76,4 +78,3 @@
         tools:context=".NavigationDrawerFragment" />
 
 </LinearLayout>
-
