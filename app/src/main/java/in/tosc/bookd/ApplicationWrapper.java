@@ -6,6 +6,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 
 /**
@@ -22,6 +23,6 @@ public class ApplicationWrapper extends Application {
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
         ParseFacebookUtils.initialize(this);
-//        ParseTwitterUtils.initialize();
+        ParseTwitterUtils.initialize("J3ncUDAVwYhOPRadv1kD7Z75G","bVSeScEZB8u7jFnLQmtk0FiCTdw1vIJJpfapTDrHDoVFLEOFCP");
     }
 }

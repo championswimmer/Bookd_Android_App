@@ -3,6 +3,7 @@ package in.tosc.bookd.signon;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,7 +25,13 @@ import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
+import com.parse.twitter.Twitter;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -131,7 +138,36 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                     Log.d(TAG, "Uh oh. The user cancelled the Twitter login.");
                 } else if (!fullyRegistered) {
                     Log.d(TAG, "User signed up and logged in through Twitter!");
-                    showSignupDataFragment(null);
+                    final String infoGetUrl = "https://api.twitter.com/1.1/users/show.json?screen_name=%s";
+                    new AsyncTask<Void, Void, Bundle>() {
+                        Bundle twitterBundle = new Bundle();
+                        @Override
+                        protected Bundle doInBackground(Void... params) {
+                            Twitter twitter = ParseTwitterUtils.getTwitter();
+                            HttpClient client = new DefaultHttpClient();
+                            HttpGet verifyGet = new HttpGet(String.format(infoGetUrl, twitter.getScreenName()));
+                            twitter.signRequest(verifyGet);
+                            try {
+                                HttpResponse response = client.execute(verifyGet);
+                                JSONObject object = new JSONObject(EntityUtils.toString(response.getEntity()));
+                                if(object.getString("profile_image_url") != null)
+                                    twitterBundle.putString(ParseTables.Users.IMAGE,object.getString("profile_image_url").replace("_normal", ""));
+                                if(object.getString("profile_background_image_url") != null)
+                                    twitterBundle.putString(ParseTables.Users.COVER,object.getString("profile_background_image_url"));
+                                if(object.getString("name") != null)
+                                    twitterBundle.putString(ParseTables.Users.NAME, object.getString("name"));
+                                return twitterBundle;
+                            } catch (Exception e){
+
+                            }
+                            return null;
+                        }
+                        @Override
+                        protected void onPostExecute(Bundle twitterBundle) {
+                            showSignupDataFragment(twitterBundle);
+                        }
+                    }.execute();
+
                 } else {
                     Log.d(TAG, "User logged in through Twitter!");
                     Intent i = new Intent(getActivity(), MainActivity.class);
