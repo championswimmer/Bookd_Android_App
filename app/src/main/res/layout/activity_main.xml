@@ -21,6 +21,17 @@
             android:background="?attr/colorPrimary"
             app:theme="@style/myCustomTheme" />
 
+        <in.tosc.bookd.ui.AutofitRecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:paddingRight="@dimen/padding_book_recyclerview"
+            android:paddingLeft="@dimen/padding_book_recyclerview"
+            android:paddingBottom="@dimen/padding_book_recyclerview"
+            android:columnWidth="@dimen/column_width_book_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"/>
+
+
     </FrameLayout>
 
 
