@@ -1,9 +1,11 @@
 package in.tosc.bookd.topactivities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -31,13 +33,14 @@ import java.util.List;
 
 import in.tosc.bookd.ParseTables;
 import in.tosc.bookd.R;
-import in.tosc.bookd.ui.NumberedAdapter;
 import in.tosc.bookd.utilactivities.AddBookLibraryActivity;
 
 public class LibraryActivity extends ActionBarActivity {
 
     Toolbar toolbar;
     private String myTitle;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +59,12 @@ public class LibraryActivity extends ActionBarActivity {
             }
         }
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(
+        mRecyclerView = (RecyclerView) findViewById(
                 R.id.library_recyclerview);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new NumberedAdapter(30));
-
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(layoutManager);
         FloatingActionButton libraryFab = (FloatingActionButton) findViewById(R.id.library_fab);
-        libraryFab.attachToRecyclerView(recyclerView);
+        libraryFab.attachToRecyclerView(mRecyclerView);
 
         fetchLibrary();
         libraryFab.setOnClickListener(new View.OnClickListener() {
@@ -139,11 +141,14 @@ public class LibraryActivity extends ActionBarActivity {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
-
+                if(e==null){
+                    mAdapter = new LibraryAdapter(parseObjects);
+                    mRecyclerView.setAdapter(mAdapter);
+                }else{
+                    e.printStackTrace();
+                }
             }
         });
-
-
     }
 
     public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHolder> {
@@ -162,7 +167,11 @@ public class LibraryActivity extends ActionBarActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-
+            viewHolder.author.setText(mDataset.get(i).getString(ParseTables.Book.AUTHOR));
+            viewHolder.bookName.setText(mDataset.get(i).getString(ParseTables.Book.TITLE));
+            viewHolder.publisher.setText(mDataset.get(i).getString(ParseTables.Book.PUBLISHER));
+            Uri bookImageUri = Uri.parse(mDataset.get(i).getString(ParseTables.Book.IMAGE));
+            viewHolder.bookCover.setImageURI(bookImageUri);
         }
 
         @Override

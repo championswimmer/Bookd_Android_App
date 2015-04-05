@@ -17,4 +17,15 @@ public class ParseTables {
         public static final String LIBRARY = "library";
         public static final String WISHLIST = "wishlist";
     }
+
+    public static class Book{
+        public static final String AUTHOR = "authors";
+        public static final String IMAGE = "image";
+        public static final String CATEGORY = "category";
+        public static final String ISBN = "isbn";
+        public static final String PUBLISHER = "publisher";
+        public static final String RATING = "rating";
+        public static final String SUMMARY = "summary";
+        public static final String TITLE = "title";
+    }
 }
