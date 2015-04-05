@@ -5,10 +5,19 @@ import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 import android.util.Patterns;
 import android.widget.EditText;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +31,9 @@ public class Utils {
 
 
     public static final String TAG = "Utils";
+
+    public static final String PARENT_CACHE_DIRECTORY = "BookD/";
+    protected static final String CACHE_DIRECTORY = "BookD/cover";
 
     public static String getUserEmail(Context context) {
         Pattern emailPattern = Patterns.EMAIL_ADDRESS;
@@ -80,4 +92,123 @@ public class Utils {
         activity.startActivity(i);
         activity.finish();
     }
-}
+
+    public static boolean addUriToCache(String Id,Uri uri) {
+        File cacheDirectory;
+        BufferedWriter bw = null;
+
+
+        try {
+            cacheDirectory = ensureCache();
+        } catch (IOException e) {
+            Log.e(TAG, "Could not create cache directory!");
+            return false;
+        }
+    try {
+        File coverFile = new File(cacheDirectory,Id);
+        FileWriter fw = new FileWriter(coverFile.getAbsoluteFile());
+        fw.write(uri.toString());
+        fw.close();
+        Log.d("lol",uri.toString());
+    }catch (IOException e){
+
+    }
+
+
+        return true;
+    }
+    public static File ensureCache() throws IOException {
+        File cacheDirectory = getCacheDirectory();
+        if (!cacheDirectory.exists()) {
+            if (!cacheDirectory.mkdirs()) {
+                File parentCache = ensureParentCache();
+                new File(parentCache, ".nomedia").createNewFile();
+                cacheDirectory = getCacheDirectory();
+                cacheDirectory.mkdirs();
+            }
+            new File(cacheDirectory, ".nomedia").createNewFile();
+        }
+        return cacheDirectory;
+    }
+
+    public static File getCacheDirectory() {
+        return getExternalFile(CACHE_DIRECTORY);
+    }
+
+    public static File getExternalFile(String file) {
+        return new File(Environment.getExternalStorageDirectory(), file);
+    }
+    public static File ensureParentCache() throws IOException {
+        File cacheDirectory = new File(
+                Environment.getExternalStorageDirectory(),
+                PARENT_CACHE_DIRECTORY);
+        if (!cacheDirectory.exists()) {
+            cacheDirectory.mkdirs();
+            new File(cacheDirectory, ".nomedia").createNewFile();
+        }
+        return cacheDirectory;
+    }
+
+  public static String loadUri(String id) {
+
+      String uri="";
+        if (id == null)
+            return null;
+        final File file = new File(getCacheDirectory(), id);
+
+        try {
+            if (file.exists()) {
+                String currentLine;
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                StringBuilder stringBuilder = new StringBuilder();
+                Log.d("lol","lol0");
+
+                while ( (currentLine= br.readLine()) != null ) {
+                    stringBuilder.append(currentLine);
+
+                }
+                Log.d("lol","lol1");
+                uri=stringBuilder.toString();
+                Log.d("lollol",uri);
+                br.close();
+            } else {
+                // final File newFile = new File(IOUtilities.ensureCache(), id);
+                // if (newFile.exists())
+                // return decodeFile(newFile);
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return uri;
+    }
+
+    public static String readFileAsString(String id) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        BufferedReader in = null;
+
+        final File file = new File(getCacheDirectory(), id);
+
+        try {
+            in = new BufferedReader(new FileReader(file));
+            while ((line = in.readLine()) != null) stringBuilder.append(line);
+            Log.d("lol",stringBuilder.toString());
+
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+
+        }
+
+        return stringBuilder.toString();
+    }
+
+
+
+    }
+
+
+
+
+

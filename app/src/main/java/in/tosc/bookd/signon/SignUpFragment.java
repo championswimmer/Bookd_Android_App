@@ -19,6 +19,7 @@ import com.parse.SignUpCallback;
 import in.tosc.bookd.MainActivity;
 import in.tosc.bookd.ParseTables;
 import in.tosc.bookd.R;
+import in.tosc.bookd.Utils;
 import in.tosc.bookd.ui.MaterialEditText;
 
 import static in.tosc.bookd.R.id.et_passwd;
@@ -68,11 +69,14 @@ public class SignUpFragment extends Fragment {
         if(mBundle.getString(ParseTables.Users.IMAGE)!=null){
             Uri profileUri = Uri.parse(mBundle.getString(ParseTables.Users.IMAGE));
             profile.setImageURI(profileUri);
+            Utils.addUriToCache("profile",profileUri);
+
         }
         SimpleDraweeView cover = (SimpleDraweeView) rootView.findViewById(R.id.cover);
         if(mBundle.getString(ParseTables.Users.COVER)!=null){
             Uri coverUri = Uri.parse(mBundle.getString(ParseTables.Users.COVER));
             cover.setImageURI(coverUri);
+            Utils.addUriToCache("cover",coverUri);
         }
         if(mBundle.get(ParseTables.Users.USERNAME) == null){
             username.setVisibility(View.GONE);
@@ -84,6 +88,7 @@ public class SignUpFragment extends Fragment {
         }
         if(mBundle.getString(ParseTables.Users.NAME) != null)
             mName.setText(mBundle.getString(ParseTables.Users.NAME));
+            Utils.addUriToCache("name",Uri.parse(mBundle.getString(ParseTables.Users.NAME)));
         Button parsePush = (Button) rootView.findViewById(R.id.btn_parsepush);
         parsePush.setTypeface(secondTypface);
         parsePush.setOnClickListener(new View.OnClickListener() {
