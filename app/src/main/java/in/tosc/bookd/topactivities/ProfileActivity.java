@@ -39,7 +39,7 @@ public class ProfileActivity extends ActionBarActivity {
         cover=(SimpleDraweeView) findViewById(R.id.cover);
         profile=(SimpleDraweeView) findViewById(R.id.profile);
         name=(TextView) findViewById(R.id.name);
-        name.setText(Utils.loadUri("name"));
+        name.setText(Utils.readFileAsString("name"));
         cover.setImageURI(Uri.parse(Utils.readFileAsString("cover")));
         profile.setImageURI(Uri.parse(Utils.readFileAsString("profile")));
 

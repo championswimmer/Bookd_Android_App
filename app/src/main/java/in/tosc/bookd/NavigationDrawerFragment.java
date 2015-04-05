@@ -135,7 +135,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         cover.setImageURI(Uri.parse(Utils.readFileAsString("cover")));
         profile.setImageURI(Uri.parse(Utils.readFileAsString("profile")));
-        name.setText(Utils.loadUri("name"));
+        name.setText(Utils.readFileAsString("name"));
         return v;
     }
 

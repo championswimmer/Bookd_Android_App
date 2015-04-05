@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <me.dm7.barcodescanner.zbar.ZBarScannerView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/scannerView"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/profile"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_gravity="center"
+            fresco:placeholderImage="@drawable/com_facebook_profile_picture_blank_portrait"
+            fresco:roundAsCircle="true"/>
+
+
+
+
+
+    </FrameLayout>
+
+
+</FrameLayout>
