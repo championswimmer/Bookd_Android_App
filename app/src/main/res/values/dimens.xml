@@ -51,5 +51,6 @@
     <dimen name="bottom_ellipsis_height">5dp</dimen>
     <dimen name="bbuton_rounded_corner_radius">3dp</dimen>
 
+    <dimen name="list_item_translation_z">2dp</dimen>
 
 </resources>
