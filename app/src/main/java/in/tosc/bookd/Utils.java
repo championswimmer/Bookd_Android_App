@@ -158,6 +158,9 @@ public class Utils {
 
         final File file = new File(getCacheDirectory(), id);
 
+        if (!file.exists())
+            return "";
+
         try {
             in = new BufferedReader(new FileReader(file));
             while ((line = in.readLine()) != null) stringBuilder.append(line);
