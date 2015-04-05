@@ -2,7 +2,9 @@ package in.tosc.bookd;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.util.Patterns;
 import android.widget.EditText;
@@ -71,5 +73,11 @@ public class Utils {
         ISBN13 += sum;
 
         return ISBN13;
+    }
+
+    public static void goToMainActivity(Activity activity){
+        Intent i = new Intent(activity, MainActivity.class);
+        activity.startActivity(i);
+        activity.finish();
     }
 }

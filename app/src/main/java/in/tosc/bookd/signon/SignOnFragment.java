@@ -1,7 +1,6 @@
 package in.tosc.bookd.signon;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,7 +37,6 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.List;
 
-import in.tosc.bookd.MainActivity;
 import in.tosc.bookd.ParseTables;
 import in.tosc.bookd.R;
 import in.tosc.bookd.Utils;
@@ -65,9 +63,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                 && (pUser.getBoolean(ParseTables.Users.FULLY_REGISTERED))
                 && (pUser.getSessionToken() != null)) {
             Log.d(TAG, pUser.getUsername() + pUser.getSessionToken());
-            Intent i = new Intent(getActivity(), MainActivity.class);
-            startActivity(i);
-            getActivity().finish();
+            Utils.goToMainActivity(getActivity());
         }
     }
 
@@ -132,47 +128,20 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
         ParseTwitterUtils.logIn(getActivity(), new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
-                boolean fullyRegistered = false;
-                fullyRegistered = parseUser.getBoolean(ParseTables.Users.FULLY_REGISTERED);
-                if (parseUser == null) {
-                    Log.d(TAG, "Uh oh. The user cancelled the Twitter login.");
-                } else if (!fullyRegistered) {
-                    Log.d(TAG, "User signed up and logged in through Twitter!");
-                    final String infoGetUrl = "https://api.twitter.com/1.1/users/show.json?screen_name=%s";
-                    new AsyncTask<Void, Void, Bundle>() {
-                        Bundle twitterBundle = new Bundle();
-                        @Override
-                        protected Bundle doInBackground(Void... params) {
-                            Twitter twitter = ParseTwitterUtils.getTwitter();
-                            HttpClient client = new DefaultHttpClient();
-                            HttpGet verifyGet = new HttpGet(String.format(infoGetUrl, twitter.getScreenName()));
-                            twitter.signRequest(verifyGet);
-                            try {
-                                HttpResponse response = client.execute(verifyGet);
-                                JSONObject object = new JSONObject(EntityUtils.toString(response.getEntity()));
-                                if(object.getString("profile_image_url") != null)
-                                    twitterBundle.putString(ParseTables.Users.IMAGE,object.getString("profile_image_url").replace("_normal", ""));
-                                if(object.getString("profile_background_image_url") != null)
-                                    twitterBundle.putString(ParseTables.Users.COVER,object.getString("profile_background_image_url"));
-                                if(object.getString("name") != null)
-                                    twitterBundle.putString(ParseTables.Users.NAME, object.getString("name"));
-                                return twitterBundle;
-                            } catch (Exception e){
-
-                            }
-                            return null;
-                        }
-                        @Override
-                        protected void onPostExecute(Bundle twitterBundle) {
-                            showSignupDataFragment(twitterBundle);
-                        }
-                    }.execute();
-
-                } else {
-                    Log.d(TAG, "User logged in through Twitter!");
-                    Intent i = new Intent(getActivity(), MainActivity.class);
-                    startActivity(i);
-                    getActivity().finish();
+                if(e == null){
+                    boolean fullyRegistered = false;
+                    fullyRegistered = parseUser.getBoolean(ParseTables.Users.FULLY_REGISTERED);
+                    if (parseUser == null) {
+                        Log.d(TAG, "Uh oh. The user cancelled the Twitter login.");
+                    } else if (!fullyRegistered) {
+                        Log.d(TAG, "User signed up and logged in through Twitter!");
+                        getTwitterData();
+                    } else {
+                        Log.d(TAG, "User logged in through Twitter!");
+                        Utils.goToMainActivity(getActivity());
+                    }
+                }else{
+                    e.printStackTrace();
                 }
             }
         });
@@ -186,46 +155,17 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
             public void done(ParseUser parseUser, ParseException e) {
                 Log.d(TAG, "logInWithReadPermissionsInBackground done");
                 if (e == null) {
-                    boolean fullyRegistered = false;
-                    try {
-                        fullyRegistered = parseUser.getBoolean(ParseTables.Users.FULLY_REGISTERED);
-                    } catch (Exception ignored) {
-                    }
-                    if (!fullyRegistered) {
-                        final Bundle b = new Bundle();
-                        GraphRequest request = GraphRequest.newMeRequest(
-                                AccessToken.getCurrentAccessToken(),
-                                new GraphRequest.GraphJSONObjectCallback() {
-                                    @Override
-                                    public void onCompleted(
-                                            JSONObject object,
-                                            GraphResponse response) {
-                                        Log.d(TAG,"" +object);
-                                        try {
-                                            if(!object.isNull("cover"))
-                                                b.putString(ParseTables.Users.COVER,object.getJSONObject("cover").getString("source"));
-                                            String id = object.getString("id");
-                                            b.putString(ParseTables.Users.IMAGE,"https://graph.facebook.com/" + id + "/picture??width=300&&height=300");
-                                            b.putString(ParseTables.Users.NAME, object.getString("name"));
-                                            showSignupDataFragment(b);
-                                        } catch (JSONException e1) {
-                                            e1.printStackTrace();
-                                        }
-                                    }
-                                });
-                        Bundle parameters = new Bundle();
-                        parameters.putString("fields", "name,id,cover");
-                        request.setParameters(parameters);
-                        request.executeAsync();
+                    boolean fullyRegistered = parseUser.getBoolean(ParseTables.Users.FULLY_REGISTERED);
+                    if (parseUser == null)
+                        Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
+                    else if(!fullyRegistered) {
+                        getFacebookData();
                     } else {
-                        Intent i = new Intent(getActivity(), MainActivity.class);
-                        startActivity(i);
-                        getActivity().finish();
+                        Utils.goToMainActivity(getActivity());
                     }
                 } else {
                     e.printStackTrace();
                 }
-
             }
         });
     }
@@ -240,8 +180,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                         @Override
                         public void done(ParseUser parseUser, ParseException e) {
                             if (parseUser != null) {
-                                Intent i = new Intent(getActivity(), MainActivity.class);
-                                startActivity(i);
+                                Utils.goToMainActivity(getActivity());
                             } else {
                                 new AlertDialog.Builder(getActivity())
                                         .setTitle("Login failed")
@@ -284,6 +223,66 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
             return false;
         }
         return true;
+    }
+
+    private void getTwitterData(){
+        final String infoGetUrl = "https://api.twitter.com/1.1/users/show.json?screen_name=%s";
+        new AsyncTask<Void, Void, Bundle>() {
+            Bundle twitterBundle = new Bundle();
+            @Override
+            protected Bundle doInBackground(Void... params) {
+                Twitter twitter = ParseTwitterUtils.getTwitter();
+                HttpClient client = new DefaultHttpClient();
+                HttpGet verifyGet = new HttpGet(String.format(infoGetUrl, twitter.getScreenName()));
+                twitter.signRequest(verifyGet);
+                try {
+                    HttpResponse response = client.execute(verifyGet);
+                    JSONObject object = new JSONObject(EntityUtils.toString(response.getEntity()));
+                    if(object.getString("profile_image_url") != null)
+                        twitterBundle.putString(ParseTables.Users.IMAGE,object.getString("profile_image_url").replace("_normal", ""));
+                    if(object.getString("profile_background_image_url") != null)
+                        twitterBundle.putString(ParseTables.Users.COVER,object.getString("profile_background_image_url"));
+                    if(object.getString("name") != null)
+                        twitterBundle.putString(ParseTables.Users.NAME, object.getString("name"));
+                    return twitterBundle;
+                } catch (Exception e){
+
+                }
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Bundle twitterBundle) {
+                showSignupDataFragment(twitterBundle);
+            }
+        }.execute();
+    }
+
+    private void getFacebookData() {
+        final Bundle b = new Bundle();
+        GraphRequest request = GraphRequest.newMeRequest(
+                AccessToken.getCurrentAccessToken(),
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(
+                            JSONObject object,
+                            GraphResponse response) {
+                        Log.d(TAG,"" +object);
+                        try {
+                            if(!object.isNull("cover"))
+                                b.putString(ParseTables.Users.COVER,object.getJSONObject("cover").getString("source"));
+                            String id = object.getString("id");
+                            b.putString(ParseTables.Users.IMAGE,"https://graph.facebook.com/" + id + "/picture??width=300&&height=300");
+                            b.putString(ParseTables.Users.NAME, object.getString("name"));
+                            showSignupDataFragment(b);
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "name,id,cover");
+        request.setParameters(parameters);
+        request.executeAsync();
     }
 
 }
