@@ -17,9 +17,16 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.melnykov.fab.FloatingActionButton;
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import in.tosc.bookd.ParseTables;
@@ -116,6 +123,27 @@ public class LibraryActivity extends ActionBarActivity {
     private void fetchLibrary(){
         ParseUser parseUser = ParseUser.getCurrentUser();
         Log.d("Response ", String.valueOf(parseUser.getJSONArray(ParseTables.Users.LIBRARY)));
+        JSONArray jArray = parseUser.getJSONArray(ParseTables.Users.LIBRARY);
+        ArrayList<String> isbnList = new ArrayList<String>();
+        if (jArray != null) {
+            for (int i=0;i<jArray.length();i++){
+                try {
+                    isbnList.add(jArray.get(i).toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        ParseQuery<ParseObject> query = new ParseQuery<>("Book");
+        query.whereContainedIn("isbn", isbnList);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+
+            }
+        });
+
+
     }
 
     public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHolder> {
