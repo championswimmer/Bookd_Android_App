@@ -58,6 +58,7 @@
         <activity
             android:name=".signon.SignOnActivity"
             android:label="@string/title_activity_sign_on"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SignON">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
