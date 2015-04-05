@@ -128,7 +128,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
         ParseTwitterUtils.logIn(getActivity(), new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
-                if(e == null){
+                if (e == null) {
                     boolean fullyRegistered = false;
                     fullyRegistered = parseUser.getBoolean(ParseTables.Users.FULLY_REGISTERED);
                     if (parseUser == null) {
@@ -140,7 +140,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                         Log.d(TAG, "User logged in through Twitter!");
                         Utils.goToMainActivity(getActivity());
                     }
-                }else{
+                } else {
                     e.printStackTrace();
                 }
             }
@@ -149,7 +149,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
 
     private void signInFB() {
         List<String> permissions = Arrays.asList(
-                "public_profile");
+                "public_profile", "email");
         ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(), permissions, new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
@@ -197,6 +197,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
     private void signUp() {
         Bundle b = new Bundle();
         b.putString(ParseTables.Users.USERNAME, mUsername.getText().toString());
+        b.putString(ParseTables.Users.EMAIL, mUsername.getText().toString());
         b.putString(ParseTables.Users.PASSWORD, mPassword.getText().toString());
         showSignupDataFragment(b);
     }
@@ -244,8 +245,9 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                         twitterBundle.putString(ParseTables.Users.COVER,object.getString("profile_background_image_url"));
                     if(object.getString("name") != null)
                         twitterBundle.putString(ParseTables.Users.NAME, object.getString("name"));
-                    if(object.getString("screen_name") != null)
+                    if(object.getString("screen_name") != null) {
                         twitterBundle.putString(ParseTables.Users.USERNAME, object.getString("screen_name"));
+                    }
                     return twitterBundle;
                 } catch (Exception e){
 
@@ -275,6 +277,8 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                             String id = object.getString("id");
                             b.putString(ParseTables.Users.IMAGE,"https://graph.facebook.com/" + id + "/picture??width=300&&height=300");
                             b.putString(ParseTables.Users.NAME, object.getString("name"));
+                            b.putString(ParseTables.Users.EMAIL, object.getString("email"));
+
                             showSignupDataFragment(b);
                         } catch (JSONException e1) {
                             e1.printStackTrace();
