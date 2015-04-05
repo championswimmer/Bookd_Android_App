@@ -15,7 +15,9 @@
     <in.tosc.bookd.ui.AutofitRecyclerView
         android:id="@+id/library_recyclerview"
         android:layout_marginTop="?attr/actionBarSize"
-        android:padding="@dimen/padding_book_recyclerview"
+        android:paddingRight="@dimen/padding_book_recyclerview"
+        android:paddingLeft="@dimen/padding_book_recyclerview"
+        android:paddingBottom="@dimen/padding_book_recyclerview"
         android:columnWidth="@dimen/column_width_book_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="fill_parent">
