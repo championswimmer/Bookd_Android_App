@@ -9,10 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.melnykov.fab.FloatingActionButton;
+import com.melnykov.fab.ObservableScrollView;
 import com.parse.ParseUser;
 
 import java.util.concurrent.ExecutionException;
@@ -33,19 +35,24 @@ public class AddBookLibraryActivity extends ActionBarActivity {
 
     SimpleDraweeView imageBook;
     TextView tvBookTitle, tvBookAuthor, tvBookPublisher, tvBookSummary;
-    Button addLibrary;
+    FloatingActionButton addLibraryButton;
+    ObservableScrollView addBookContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book_library);
 
+        addBookContainer = (ObservableScrollView) findViewById(R.id.add_book_container);
+
         imageBook = (SimpleDraweeView) findViewById(R.id.image_book);
         tvBookTitle = (TextView) findViewById(R.id.tv_book_title);
         tvBookAuthor = (TextView) findViewById(R.id.tv_book_author);
         tvBookPublisher = (TextView) findViewById(R.id.tv_book_publisher);
         tvBookSummary = (TextView) findViewById(R.id.tv_book_summary);
-        addLibrary = (Button) findViewById(R.id.btn_addlibrary);
+        addLibraryButton = (FloatingActionButton) findViewById(R.id.btn_addlibrary);
+
+        addLibraryButton.attachToScrollView(addBookContainer);
 
         Intent scan = new Intent(this, ScannerActivity.class);
         startActivityForResult(scan, ADD_BOOK_LIBRARY_RESULT);
@@ -77,12 +84,12 @@ public class AddBookLibraryActivity extends ActionBarActivity {
                     imageBook.setImageURI(bookImageUri);
                 }
 
-                addLibrary.setVisibility(View.VISIBLE);
-                addLibrary.setOnClickListener(new View.OnClickListener() {
+                addLibraryButton.setVisibility(View.VISIBLE);
+                addLibraryButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         ParseUser pUser = ParseUser.getCurrentUser();
-                        pUser.add(ParseTables.Users.LIBRARY,bookObject.getIsbn());
+                        pUser.add(ParseTables.Users.LIBRARY, bookObject.getIsbn());
                         pUser.saveEventually();
                     }
                 });
