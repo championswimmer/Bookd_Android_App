@@ -129,11 +129,10 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
             @Override
             public void done(ParseUser parseUser, ParseException e) {
                 if (e == null) {
-                    boolean fullyRegistered = false;
-                    fullyRegistered = parseUser.getBoolean(ParseTables.Users.FULLY_REGISTERED);
+                    boolean fullyRegistered = parseUser.getBoolean(ParseTables.Users.FULLY_REGISTERED);
                     if (parseUser == null) {
                         Log.d(TAG, "Uh oh. The user cancelled the Twitter login.");
-                    } else if (!fullyRegistered) {
+                    } else if (!fullyRegistered || parseUser.isNew()) {
                         Log.d(TAG, "User signed up and logged in through Twitter!");
                         getTwitterData();
                     } else {
@@ -158,7 +157,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                     boolean fullyRegistered = parseUser.getBoolean(ParseTables.Users.FULLY_REGISTERED);
                     if (parseUser == null)
                         Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
-                    else if(!fullyRegistered) {
+                    else if(!fullyRegistered || parseUser.isNew()) {
                         getFacebookData();
                     } else {
                         Utils.goToMainActivity(getActivity());
@@ -199,10 +198,10 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
         b.putString(ParseTables.Users.USERNAME, mUsername.getText().toString());
         b.putString(ParseTables.Users.EMAIL, mUsername.getText().toString());
         b.putString(ParseTables.Users.PASSWORD, mPassword.getText().toString());
-        showSignupDataFragment(b);
+        showSignUpFragment(b);
     }
 
-    public SignUpFragment showSignupDataFragment(Bundle b) {
+    public SignUpFragment showSignUpFragment(Bundle b) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         SignUpFragment signUpFragment = SignUpFragment.newInstance(b);
@@ -256,7 +255,7 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
             }
             @Override
             protected void onPostExecute(Bundle twitterBundle) {
-                showSignupDataFragment(twitterBundle);
+                showSignUpFragment(twitterBundle);
             }
         }.execute();
     }
@@ -279,14 +278,14 @@ public class SignOnFragment extends Fragment implements View.OnClickListener{
                             b.putString(ParseTables.Users.NAME, object.getString("name"));
                             b.putString(ParseTables.Users.EMAIL, object.getString("email"));
 
-                            showSignupDataFragment(b);
+                            showSignUpFragment(b);
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }
                     }
                 });
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "name,id,cover");
+        parameters.putString("fields", "name,id,cover,email");
         request.setParameters(parameters);
         request.executeAsync();
     }

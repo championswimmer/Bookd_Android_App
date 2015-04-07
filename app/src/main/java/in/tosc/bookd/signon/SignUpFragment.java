@@ -104,56 +104,69 @@ public class SignUpFragment extends Fragment {
     }
 
     private void pushToParse(){
-        ParseUser user = ParseUser.getCurrentUser();
-        if(user == null)
-            user = new ParseUser();
-        if (mBundle.getString(ParseTables.Users.USERNAME) != null) {
-            user.setUsername(mBundle.getString(ParseTables.Users.USERNAME));
-        }
-        if (mBundle.getString(ParseTables.Users.EMAIL) != null) {
-            user.setEmail(mBundle.getString(ParseTables.Users.EMAIL));
-        }
-        if (mBundle.getString(ParseTables.Users.PASSWORD) != null) {
-            user.setPassword(mBundle.getString(ParseTables.Users.PASSWORD));
-        } else {
-            user.setPassword(UUID.randomUUID().toString().substring(0,6));
-        }
-        user.put(ParseTables.Users.NAME, mName.getText().toString());
-        user.put(ParseTables.Users.MOBILE, mPhone.getText().toString());
-        user.put(ParseTables.Users.FULLY_REGISTERED, true);
-        if (mBundle.getString(ParseTables.Users.COVER) != null) {
-            user.put(ParseTables.Users.COVER, mBundle.getString(ParseTables.Users.COVER));
-        }
-        if (mBundle.getString(ParseTables.Users.IMAGE) != null) {
-            user.put(ParseTables.Users.IMAGE, mBundle.getString(ParseTables.Users.IMAGE));
-        }
-        if (user.getSessionToken() != null) {
-            user.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e == null) {
-                        Intent i = new Intent(getActivity(), MainActivity.class);
-                        startActivity(i);
-                        getActivity().finish();
-                    } else {
-                        e.printStackTrace();
+        if(validateData()){
+            ParseUser user = ParseUser.getCurrentUser();
+            if(user == null)
+                user = new ParseUser();
+            if (mBundle.getString(ParseTables.Users.USERNAME) != null) {
+                user.setUsername(mBundle.getString(ParseTables.Users.USERNAME));
+            }
+            if (mBundle.getString(ParseTables.Users.EMAIL) != null) {
+                user.setEmail(mBundle.getString(ParseTables.Users.EMAIL));
+            }
+            if (mBundle.getString(ParseTables.Users.PASSWORD) != null) {
+                user.setPassword(mBundle.getString(ParseTables.Users.PASSWORD));
+            } else {
+                user.setPassword(UUID.randomUUID().toString().substring(0,6));
+            }
+            user.put(ParseTables.Users.NAME, mName.getText().toString());
+            user.put(ParseTables.Users.MOBILE, mPhone.getText().toString());
+            user.put(ParseTables.Users.FULLY_REGISTERED, true);
+            if (mBundle.getString(ParseTables.Users.COVER) != null) {
+                user.put(ParseTables.Users.COVER, mBundle.getString(ParseTables.Users.COVER));
+            }
+            if (mBundle.getString(ParseTables.Users.IMAGE) != null) {
+                user.put(ParseTables.Users.IMAGE, mBundle.getString(ParseTables.Users.IMAGE));
+            }
+            if (user.getSessionToken() != null) {
+                user.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Intent i = new Intent(getActivity(), MainActivity.class);
+                            startActivity(i);
+                            getActivity().finish();
+                        } else {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            });
-        } else {
-            user.signUpInBackground(new SignUpCallback() {
-                public void done(ParseException e) {
-                    if (e == null) {
-                        Intent i = new Intent(getActivity(), MainActivity.class);
-                        startActivity(i);
-                        getActivity().finish();
-                    } else {
-                        e.printStackTrace();
+                });
+            } else {
+                user.signUpInBackground(new SignUpCallback() {
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Intent i = new Intent(getActivity(), MainActivity.class);
+                            startActivity(i);
+                            getActivity().finish();
+                        } else {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            });
+                });
+            }
         }
+    }
 
+    private boolean validateData(){
+        if(Utils.isEditTextEmpty(mName)){
+            mName.setError("Required");
+            return false;
+        }
+        if(Utils.isEditTextEmpty(mPhone)){
+            mPhone.setError("Required");
+            return false;
+        }
+        return true;
     }
 
 
