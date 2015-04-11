@@ -1,23 +1,20 @@
 package in.tosc.bookd;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import in.tosc.bookd.topactivities.CreditsActivity;
 import in.tosc.bookd.topactivities.LibraryActivity;
 import in.tosc.bookd.topactivities.OrdersActivity;
 import in.tosc.bookd.topactivities.WishlistActivity;
+import in.tosc.bookd.ui.NumberedAdapter;
 
 
 public class MainActivity extends ActionBarActivity
@@ -25,7 +22,7 @@ public class MainActivity extends ActionBarActivity
 
     Toolbar toolbar;
     private String myTitle;
-
+    private RecyclerView mRecyclerView;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -59,6 +56,14 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(
+                R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(new NumberedAdapter(30));
+
+
+
     }
 
     @Override

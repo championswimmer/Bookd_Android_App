@@ -7,6 +7,7 @@ public class ParseTables {
 
     public static class Users {
         public static final String NAME = "NAME";
+        public static final String EMAIL = "email";
         public static final String USERNAME = "USERNAME";
         public static final String PASSWORD = "PASSWORD";
         public static final String LOCATION = "location";

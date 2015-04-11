@@ -16,7 +16,10 @@ import android.widget.Button;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
+
+import java.util.UUID;
 
 import in.tosc.bookd.MainActivity;
 import in.tosc.bookd.ParseTables;
@@ -81,7 +84,7 @@ public class SignUpFragment extends Fragment {
             cover.setImageURI(coverUri);
             editor.putString("coverimage",coverUri.toString());
         }
-        if(mBundle.get(ParseTables.Users.USERNAME) == null){
+        if(mBundle.get(ParseTables.Users.PASSWORD) == null){
             username.setVisibility(View.GONE);
             password.setVisibility(View.GONE);
         }
@@ -108,25 +111,53 @@ public class SignUpFragment extends Fragment {
         ParseUser user = ParseUser.getCurrentUser();
         if(user == null)
             user = new ParseUser();
-        user.setEmail(mBundle.getString(ParseTables.Users.USERNAME));
-        user.setUsername(mBundle.getString(ParseTables.Users.USERNAME));
-        user.setPassword(mBundle.getString(ParseTables.Users.PASSWORD));
+        if (mBundle.getString(ParseTables.Users.USERNAME) != null) {
+            user.setUsername(mBundle.getString(ParseTables.Users.USERNAME));
+        }
+        if (mBundle.getString(ParseTables.Users.EMAIL) != null) {
+            user.setEmail(mBundle.getString(ParseTables.Users.EMAIL));
+        }
+        if (mBundle.getString(ParseTables.Users.PASSWORD) != null) {
+            user.setPassword(mBundle.getString(ParseTables.Users.PASSWORD));
+        } else {
+            user.setPassword(UUID.randomUUID().toString().substring(0,6));
+        }
         user.put(ParseTables.Users.NAME, mName.getText().toString());
         user.put(ParseTables.Users.MOBILE, mPhone.getText().toString());
         user.put(ParseTables.Users.FULLY_REGISTERED, true);
-        user.put(ParseTables.Users.COVER,mBundle.getString(ParseTables.Users.COVER));
-        user.put(ParseTables.Users.IMAGE,mBundle.getString(ParseTables.Users.IMAGE));
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    Intent i = new Intent(getActivity(), MainActivity.class);
-                    startActivity(i);
-                    getActivity().finish();
-                } else {
-                    e.printStackTrace();
+        if (mBundle.getString(ParseTables.Users.COVER) != null) {
+            user.put(ParseTables.Users.COVER, mBundle.getString(ParseTables.Users.COVER));
+        }
+        if (mBundle.getString(ParseTables.Users.IMAGE) != null) {
+            user.put(ParseTables.Users.IMAGE, mBundle.getString(ParseTables.Users.IMAGE));
+        }
+        if (user.getSessionToken() != null) {
+            user.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        Intent i = new Intent(getActivity(), MainActivity.class);
+                        startActivity(i);
+                        getActivity().finish();
+                    } else {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            user.signUpInBackground(new SignUpCallback() {
+                public void done(ParseException e) {
+                    if (e == null) {
+                        Intent i = new Intent(getActivity(), MainActivity.class);
+                        startActivity(i);
+                        getActivity().finish();
+                    } else {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
     }
 
 
