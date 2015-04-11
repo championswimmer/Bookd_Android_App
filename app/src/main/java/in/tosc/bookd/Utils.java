@@ -32,8 +32,6 @@ public class Utils {
 
     public static final String TAG = "Utils";
 
-    public static final String PARENT_CACHE_DIRECTORY = "BookD/";
-    protected static final String CACHE_DIRECTORY = "BookD/cover";
 
     public static String getUserEmail(Context context) {
         Pattern emailPattern = Patterns.EMAIL_ADDRESS;
@@ -91,88 +89,6 @@ public class Utils {
         Intent i = new Intent(activity, MainActivity.class);
         activity.startActivity(i);
         activity.finish();
-    }
-
-    public static boolean addUriToCache(String Id,Uri uri) {
-        File cacheDirectory;
-        BufferedWriter bw = null;
-
-
-        try {
-            cacheDirectory = ensureCache();
-        } catch (IOException e) {
-            Log.e(TAG, "Could not create cache directory!");
-            return false;
-        }
-    try {
-        File coverFile = new File(cacheDirectory,Id);
-        FileWriter fw = new FileWriter(coverFile.getAbsoluteFile());
-        fw.write(uri.toString());
-        fw.close();
-        Log.d("lol",uri.toString());
-    }catch (IOException e){
-
-    }
-
-
-        return true;
-    }
-    public static File ensureCache() throws IOException {
-        File cacheDirectory = getCacheDirectory();
-        if (!cacheDirectory.exists()) {
-            if (!cacheDirectory.mkdirs()) {
-                File parentCache = ensureParentCache();
-                new File(parentCache, ".nomedia").createNewFile();
-                cacheDirectory = getCacheDirectory();
-                cacheDirectory.mkdirs();
-            }
-            new File(cacheDirectory, ".nomedia").createNewFile();
-        }
-        return cacheDirectory;
-    }
-
-    public static File getCacheDirectory() {
-        return getExternalFile(CACHE_DIRECTORY);
-    }
-
-    public static File getExternalFile(String file) {
-        return new File(Environment.getExternalStorageDirectory(), file);
-    }
-    public static File ensureParentCache() throws IOException {
-        File cacheDirectory = new File(
-                Environment.getExternalStorageDirectory(),
-                PARENT_CACHE_DIRECTORY);
-        if (!cacheDirectory.exists()) {
-            cacheDirectory.mkdirs();
-            new File(cacheDirectory, ".nomedia").createNewFile();
-        }
-        return cacheDirectory;
-    }
-
-
-    public static String readFileAsString(String id) {
-
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        BufferedReader in = null;
-
-        final File file = new File(getCacheDirectory(), id);
-
-        if (!file.exists())
-            return "";
-
-        try {
-            in = new BufferedReader(new FileReader(file));
-            while ((line = in.readLine()) != null) stringBuilder.append(line);
-            Log.d("lol",stringBuilder.toString());
-
-        } catch (FileNotFoundException e) {
-
-        } catch (IOException e) {
-
-        }
-
-        return stringBuilder.toString();
     }
 
 

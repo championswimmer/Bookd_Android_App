@@ -1,5 +1,6 @@
 package in.tosc.bookd.topactivities;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -11,7 +12,6 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import in.tosc.bookd.R;
-import in.tosc.bookd.Utils;
 
 public class ProfileActivity extends ActionBarActivity {
 
@@ -39,12 +39,15 @@ public class ProfileActivity extends ActionBarActivity {
         cover=(SimpleDraweeView) findViewById(R.id.cover);
         profile=(SimpleDraweeView) findViewById(R.id.profile);
         name=(TextView) findViewById(R.id.name);
-        if (!Utils.readFileAsString("name").equals(""))
-        name.setText(Utils.readFileAsString("name"));
-        if (!Utils.readFileAsString("cover").equals(""))
-        cover.setImageURI(Uri.parse(Utils.readFileAsString("cover")));
-        if (!Utils.readFileAsString("profile").equals(""))
-        profile.setImageURI(Uri.parse(Utils.readFileAsString("profile")));
+
+        SharedPreferences prefs=getSharedPreferences("profile",MODE_PRIVATE);
+
+        if (!prefs.getString("profileimage","").equals(""))
+            profile.setImageURI(Uri.parse(prefs.getString("profileimage", "")));
+        if (!prefs.getString("coverimage","").equals(""))
+            cover.setImageURI(Uri.parse(prefs.getString("coverimage","")));
+        if (!prefs.getString("name","").equals(""))
+            name.setText(prefs.getString("name",""));
 
     }
 
