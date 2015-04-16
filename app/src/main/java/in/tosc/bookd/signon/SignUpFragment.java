@@ -89,9 +89,10 @@ public class SignUpFragment extends Fragment {
             username.setText(mBundle.getString(ParseTables.Users.USERNAME));
             password.setText(mBundle.getString(ParseTables.Users.PASSWORD));
         }
-        if(mBundle.getString(ParseTables.Users.NAME) != null)
+        if(mBundle.getString(ParseTables.Users.NAME) != null) {
             mName.setText(mBundle.getString(ParseTables.Users.NAME));
-            Utils.addUriToCache("name",Uri.parse(mBundle.getString(ParseTables.Users.NAME)));
+            Utils.addUriToCache("name", Uri.parse(mBundle.getString(ParseTables.Users.NAME)));
+        }
         Button parsePush = (Button) rootView.findViewById(R.id.btn_parsepush);
         parsePush.setTypeface(secondTypface);
         parsePush.setOnClickListener(new View.OnClickListener() {
